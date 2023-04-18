@@ -1,4 +1,4 @@
-# LabPython
+# :microscope:LabPython
 Meu laboratório de projetos python.
 
 - :radioactive: Usado para criação de projetos próprios!

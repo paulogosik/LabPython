@@ -13,7 +13,7 @@ class color:
    
 
 # Inicialização - Menu Inicial
-print(f"==[ Bem-vindo à {color.i}{color.c} IM!{color.end}. Como posso te ajudar? ]==\n"
+print(f"==[ Bem-vindo à {color.i}{color.c}IM!{color.end}. Como posso te ajudar? ]==\n"
       f"    [1] Login\n"
       f"    [2] Criar conta")
 opc = input("=> ")

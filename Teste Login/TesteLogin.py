@@ -1,10 +1,31 @@
-# Criação de funções
+# Criação de funções --------------------------------
 def CriarConta():
-    name = input("=> Informe o seu nome: ")
-    name = name.title()
-    user = input("=> Informe o seu user")
+    print("hello, world")
 
-# Classe para cores
+def EntrarConta():
+    print("hello, world")
+    
+def BuscarPasswords():
+    passwords = []
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+    conteudo = arquivo.readlines()
+    for line in conteudo:
+        valores = line.split(";")
+        passwords.append(valores[1])
+    
+    return passwords
+
+def BuscarUsers():
+    users = []
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+    conteudo = arquivo.readlines()
+    for line in conteudo:
+        valores = line.split(";")
+        users.append(valores[0])
+    
+    return users
+
+# Classe para cores ---------------------------------
 class color:
    p = '\033[95m'; c = '\033[96m'
    dc = '\033[36m'; bl = '\033[94m'
@@ -20,11 +41,15 @@ class bg:
     c = '\033[46m'; w = '\033[47m'
    
 
-# Inicialização - Menu Inicial
-print(f"{color.w}==[ Bem-vindo à {color.i}{color.c}IM!{color.end}. Como posso te ajudar? ]==\n"
+# Inicialização - Menu Inicial -----------------------
+users = BuscarUsers()
+passwords = BuscarPasswords()
+print(f"==[ Bem-vindo à {color.i}{color.c}IM!{color.end}. Como posso te ajudar? ]==\n"
       f"    [1] Login\n"
       f"    [2] Criar conta\n"
       f"    {color.bo}{color.r}[3] Sair{color.end}")
-opc = input("=> ")
+opc = int(input("=> "))
 
-print('')
+
+if opc == 3:
+    exit

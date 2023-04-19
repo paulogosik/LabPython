@@ -55,13 +55,19 @@
 # print(lista)
 
 # ACESSANDO ELEMENTOS ESPECÍFICOS EM UMA LISTA -----------------------------------------
-lista = ["banana", "maçã", "abacaxi", "manga"]
-elemento = "melão"
-conteudo = ""
-for i in lista:
-        if i == elemento:
-                conteudo = i
-                print(f"=> Elemento encontrado: {i}")
-if conteudo == "":
-        print("=> Elemento não encontrado")
+# lista = ["banana", "maçã", "abacaxi", "manga"]
+# elemento = "melão"
+# conteudo = ""
+# for i in lista:
+#         if i == elemento:
+#                 conteudo = i
+#                 print(f"=> Elemento encontrado: {i}")
+# if conteudo == "":
+#         print("=> Elemento não encontrado")
 
+# WHILE PARA ACESSAR ELEMENTOS ESPECÍFICOS -----------------------------------------
+opc = int(input("=>"))
+opcoes = [1, 2, 3]
+while opc not in opcoes:
+        opc = int(input("=> "))
+print("opção certa")

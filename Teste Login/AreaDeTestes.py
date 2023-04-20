@@ -86,7 +86,7 @@ import os
 def Login():
         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
         conteudo = arquivo.readlines()
-        total = None
+        conta = None
         userQ = input("=> Informe seu user: ")
         for line in conteudo:
                 valores = line.split(";")
@@ -95,23 +95,23 @@ def Login():
                         name = valores[0]
                         user = valores[1]
                         password = valores[2]
-                        total = [name, user, password]
+                        conta = [name, user, password]
                         breakpoint
-        return total
+        return conta
 
-total = Login()
-while total == None:
+conta = Login()
+while conta == None:
         print("=> Usuário não encontrado! Deseja continuar?\n"
               "         [1] Continuar\n"
               "         [2] Sair")
         continuar = int(input("=> "))
         if continuar == 1:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                total = Login()
+                conta = Login()
         elif continuar == 2:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 break
                 
-if total != None:
+if conta != None:
         print("=> Usuário encontrado!") 
-        print(total)
+        print(conta)

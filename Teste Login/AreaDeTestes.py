@@ -82,36 +82,40 @@ import os
 #         opc = int(input("=> "))
 # print("opção certa")
 
-# BUSCAR DADOS RELACIONADOS -----------------------------------------
-def Login():
-        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
-        conteudo = arquivo.readlines()
-        conta = None
-        userQ = input("=> Informe seu user: ")
-        for line in conteudo:
-                valores = line.split(";")
-                
-                if userQ == valores[1]:
-                        name = valores[0]
-                        user = valores[1]
-                        password = valores[2]
-                        conta = [name, user, password]
-                        breakpoint
-        return conta
+# BUSCAR DADOS RELACIONADOS [USER, SENHA] -----------------------------------------
+def verificarUser():
+        def Login():
+                arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+                conteudo = arquivo.readlines()
+                conta = None
+                senha = None
+                userQ = input("=> Informe seu user: ")
+                for line in conteudo:
+                        valores = line.split(";")
+                        
+                        if userQ == valores[1]:
+                                name = valores[0]
+                                user = valores[1]
+                                password = valores[2]
+                                conta = [name, user, password]
+                                breakpoint
+                return conta
 
-conta = Login()
-while conta == None:
-        print("=> Usuário não encontrado! Deseja continuar?\n"
-        "         [1] Continuar\n"
-        "         [2] Sair")
-        continuar = int(input("=> "))
-        if continuar == 1:
-                os.system('cls' if os.name == 'nt' else 'clear')
-                conta = Login()
-        elif continuar == 2:
-                os.system('cls' if os.name == 'nt' else 'clear')
-                break
-                
-if conta != None:
-        print("=> Usuário encontrado!") 
-        print(conta)
+        conta = Login()
+        while conta == None:
+                print("=> Usuário não encontrado! Deseja continuar?\n"
+                "         [1] Continuar\n"
+                "         [2] Sair")
+                continuar = int(input("=> "))
+                if continuar == 1:
+                        os.system('cls' if os.name == 'nt' else 'clear')
+                        conta = Login()
+                elif continuar == 2:
+                        os.system('cls' if os.name == 'nt' else 'clear')
+                        break
+                        
+        return conta[0], conta[1], conta[2]
+
+name, user, password = verificarUser()
+print(f"=> {name}!")
+os.system('cls' if os.name == 'nt' else 'clear')

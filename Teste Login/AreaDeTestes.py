@@ -1,8 +1,10 @@
+import os
 # SUBSTITUINDO CARACTERES ESPECIFICOS -----------------------------------------
         # import re
-        # text = ";;..Ola..;;"
+        # text = ["Ola\n", "Teste\n"]
         # print(text)
-        # text = re.sub('[;.]', '', text)
+        # text = text[1]
+        # text = re.sub('[\n]', '', text)
         # print(text)
         
 # COLOCANDO COR EM TEXTO -----------------------------------------
@@ -47,6 +49,14 @@
 # print(users)
 # print(passwords)
 
+# passwords = []
+# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+# conteudo = arquivo.readlines()
+# for line in conteudo:
+#         valores = line.split(";")
+#         passwords.append(valores[2])
+# print(passwords)
+
 # ENTENDENDO COMO FUNCIONA APPEND() EM LISTA -----------------------------------------
 # lista = []
 # for x in range(0, 7):
@@ -66,8 +76,42 @@
 #         print("=> Elemento não encontrado")
 
 # WHILE PARA ACESSAR ELEMENTOS ESPECÍFICOS -----------------------------------------
-opc = int(input("=>"))
-opcoes = [1, 2, 3]
-while opc not in opcoes:
-        opc = int(input("=> "))
-print("opção certa")
+# opc = int(input("=>"))
+# opcoes = [1, 2, 3]
+# while opc not in opcoes:
+#         opc = int(input("=> "))
+# print("opção certa")
+
+# BUSCAR DADOS RELACIONADOS -----------------------------------------
+def Login():
+        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+        conteudo = arquivo.readlines()
+        total = None
+        userQ = input("=> Informe seu user: ")
+        for line in conteudo:
+                valores = line.split(";")
+                
+                if userQ == valores[1]:
+                        name = valores[0]
+                        user = valores[1]
+                        password = valores[2]
+                        total = [name, user, password]
+                        breakpoint
+        return total
+
+total = Login()
+while total == None:
+        print("=> Usuário não encontrado! Deseja continuar?\n"
+              "         [1] Continuar\n"
+              "         [2] Sair")
+        continuar = int(input("=> "))
+        if continuar == 1:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                total = Login()
+        elif continuar == 2:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                break
+                
+if total != None:
+        print("=> Usuário encontrado!") 
+        print(total)

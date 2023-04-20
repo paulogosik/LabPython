@@ -102,8 +102,8 @@ def Login():
 conta = Login()
 while conta == None:
         print("=> Usuário não encontrado! Deseja continuar?\n"
-              "         [1] Continuar\n"
-              "         [2] Sair")
+        "         [1] Continuar\n"
+        "         [2] Sair")
         continuar = int(input("=> "))
         if continuar == 1:
                 os.system('cls' if os.name == 'nt' else 'clear')

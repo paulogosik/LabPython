@@ -1,30 +1,3 @@
-# Criação de funções --------------------------------
-def CriarConta():
-    print("hello, world")
-
-def EntrarConta():
-    print("hello, world")
-    
-def BuscarPasswords():
-    passwords = []
-    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
-    conteudo = arquivo.readlines()
-    for line in conteudo:
-        valores = line.split(";")
-        passwords.append(valores[1])
-    
-    return passwords
-
-def BuscarUsers():
-    users = []
-    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
-    conteudo = arquivo.readlines()
-    for line in conteudo:
-        valores = line.split(";")
-        users.append(valores[0])
-    
-    return users
-
 # Classe para cores ---------------------------------
 class color:
    p = '\033[95m'; c = '\033[96m'
@@ -39,9 +12,48 @@ class bg:
     g = '\033[42m'; y = '\033[43m'
     bl = '\033[44m'; m = '\033[45m'
     c = '\033[46m'; w = '\033[47m'
-   
+    
+    
+# Criação de funções --------------------------------
+def CriarConta():
+    print("hello, world")
+
+def EntrarConta():
+    print("hello, world")
+
+def BuscarPasswords():
+    passwords = []
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+    conteudo = arquivo.readlines()
+    for line in conteudo:
+        valores = line.split(";")
+        passwords.append(valores[2])
+    
+    return passwords
+    
+def BuscarUsers():
+    users = []
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+    conteudo = arquivo.readlines()
+    for line in conteudo:
+        valores = line.split(";")
+        users.append(valores[1])
+    
+    return users
+
+def BuscarNames():
+    names = []
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+    conteudo = arquivo.readlines()
+    for line in conteudo:
+        valores = line.split(";")
+        names.append(valores[0])
+    
+    return names   
+
 
 # Inicialização - Menu Inicial -----------------------
+names = BuscarNames()
 users = BuscarUsers()
 passwords = BuscarPasswords()
 print(f"==[ Bem-vindo à {color.i}{color.c}IM!{color.end}. Como posso te ajudar? ]==\n"
@@ -50,6 +62,9 @@ print(f"==[ Bem-vindo à {color.i}{color.c}IM!{color.end}. Como posso te ajudar?
       f"    {color.bo}{color.r}[3] Sair{color.end}")
 opc = int(input("=> "))
 
+print(f"=> Names: {names}")
+print(f"=> Users: {users}")
+print(f"=> Passwords: {passwords}")
 
 if opc == 3:
     exit

@@ -31,7 +31,7 @@ def VerificarSenha(password):
                 print(f"=> Senha incorreta! Deseja continuar?\n"
                 f"         {color.g}[1] Continuar{color.end}\n"
                 f"         {color.bo}{color.r}[2] Sair{color.end}")
-                continuar = int(input("=> "))
+                continuar = input("=> ")
                 if continuar == 1:
                         Clear()
                         senha = Password()
@@ -40,7 +40,6 @@ def VerificarSenha(password):
                         break
         if senha == password:
             Clear()
-            print(f"{color.g}=> Seja bem-vindo!{color.end}{color.bo} {name}{color.end}")
 
 def verificarUser():
     def Login():
@@ -102,15 +101,19 @@ def CriarConta():
                     Clear()
                     break
                 
-        password = int(input("=> Informe a sua senha (somente números): "))
-        password2 = int(input("=> Repita a sua senha: "))          
+        password = input("=> Informe a sua senha: ")
+        password2 = input("=> Repita a sua senha: ")        
         while password != password2:
                 Clear()
                 print(f"{color.r}=> Senhas diferentes!{color.end}")
-                password = int(input("=> Informe a sua senha (somente números): "))
-                password2 = int(input("=> Repita a sua senha: "))
+                password = input("=> Informe a sua senha: ")
+                password2 = input("=> Repita a sua senha: ")
         user = user.lower()
         return name, user, password
+
+def AtualizarDB(conta):
+        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "a", encoding="utf8")
+        arquivo.write(f"\n{conta}")
 
 def BuscarPasswords():
     passwords = []
@@ -140,7 +143,22 @@ def BuscarNames():
         valores = line.split(";")
         names.append(valores[0])
     
-    return names   
+    return names
+
+def OPC_Login():
+    Clear()
+    name, user, password = verificarUser()
+    Clear()
+    print(f"{color.g}=> Usuário encontrado!{color.end}")
+    password = re.sub('[\n]', '', password)
+    VerificarSenha(password)
+    return name, user, password
+
+def OPC_CriarConta():
+    Clear()
+    name, user, password = CriarConta()
+    conta = f"{name};{user};{password}"
+    AtualizarDB(conta)
 
 
 # Inicialização - Menu Inicial -----------------------
@@ -164,21 +182,25 @@ while opc not in opcoes:
     opc = int(input("=> "))
 
 if opc == 1:
-    Clear()
-    name, user, password = verificarUser()
-    Clear()
-    print(f"{color.g}=> Usuário encontrado!{color.end}")
-    password = re.sub('[\n]', '', password)
-    VerificarSenha(password)
+    name, user, password = OPC_Login()
+    print(f"{color.g}=> Seja bem-vindo!{color.end}{color.bo} {name}{color.end}")
     
 elif opc == 2:
+    OPC_CriarConta()
     Clear()
-    name, user, password = CriarConta()
-    conta = [name, user, password]
-    print(conta)
-    contaF = f"{name};{user};{password}"
-    print(contaF)
+    print(f"=> Conta criada! Deseja fazer o login? \n"
+      f"    {color.g}[1] Login\n"
+      f"    {color.bo}{color.r}[2] Sair{color.end}")
+    login = int(input("=> "))
     
+    if login == 1:
+        Clear()
+        name, user, password = OPC_Login()
+        print(f"{color.g}=> Seja bem-vindo!{color.end}{color.bo} {name}{color.end}")
+    else:
+        Clear()
+        breakpoint
+        
 elif opc == 3:
     Clear()
     breakpoint

@@ -79,69 +79,115 @@ import re
 # WHILE PARA ACESSAR ELEMENTOS ESPECÍFICOS -----------------------------------------
 # opc = int(input("=>"))
 # opcoes = [1, 2, 3]
-# while opc not in opcoes:
+# while opc in opcoes:
 #         opc = int(input("=> "))
 # print("opção certa")
 
+# WHILE ENQUANTO FOR TRUE -----------------------------------------
+        # execucao = True
+
+        # while execucao:
+        # print("=> Repetindo...")
+        # opcao = str(input('Deseja continuar a repetir? [S/N] ')).upper().strip()
+        # if opcao == 'N':
+        #         execucao = False
+        #         exit('Obrigado por usar nosso programa.')
+
 # BUSCAR DADOS RELACIONADOS [USER, SENHA] -----------------------------------------
-def verificarUser():
-        def Login():
+# def verificarUser():
+#         def Login():
+#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                 conteudo = arquivo.readlines()
+#                 conta = None
+#                 senha = None
+#                 userQ = input("=> Informe seu user: ")
+#                 for line in conteudo:
+#                         valores = line.split(";")
+                        
+#                         if userQ == valores[1]:
+#                                 name = valores[0]
+#                                 user = valores[1]
+#                                 password = valores[2]
+#                                 conta = [name, user, password]
+#                                 breakpoint
+#                 return conta
+
+#         conta = Login()
+#         while conta == None:
+#                 print("=> Usuário não encontrado! Deseja continuar?\n"
+#                 "         [1] Continuar\n"
+#                 "         [2] Sair")
+#                 continuar = int(input("=> "))
+#                 if continuar == 1:
+#                         os.system('cls' if os.name == 'nt' else 'clear')
+#                         conta = Login()
+#                 elif continuar == 2:
+#                         os.system('cls' if os.name == 'nt' else 'clear')
+#                         break
+                        
+#         return conta[0], conta[1], conta[2]
+
+# name, user, password = verificarUser()
+# os.system('cls' if os.name == 'nt' else 'clear')
+# print(f"=> {name}!")
+
+# print(password)
+# password = re.sub('[\n]', '', password)
+# print(password)
+
+# def VerificarSenha(password):
+#         def Password():
+#                 senha = input("=> Informe sua senha: ")
+#                 return senha
+        
+#         senha = Password()
+#         print(f"Senha: {senha}")
+#         print(f"Password: {password}")
+#         while senha != password:
+#                 print("=> Senha incorreta! Deseja continuar?\n"
+#                 "         [1] Continuar\n"
+#                 "         [2] Sair")
+#                 continuar = int(input("=> "))
+#                 if continuar == 1:
+#                         os.system('cls' if os.name == 'nt' else 'clear')
+#                         senha = Password()
+#                 elif continuar == 2:
+#                         os.system('cls' if os.name == 'nt' else 'clear')
+#                         break
+# VerificarSenha(password)
+
+# CRIAÇÃO DE CONTA -----------------------------------------
+def CriarConta():
+        def UsersCriados():
                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
                 conteudo = arquivo.readlines()
-                conta = None
-                senha = None
-                userQ = input("=> Informe seu user: ")
+                usersCriados = []
                 for line in conteudo:
                         valores = line.split(";")
-                        
-                        if userQ == valores[1]:
-                                name = valores[0]
-                                user = valores[1]
-                                password = valores[2]
-                                conta = [name, user, password]
-                                breakpoint
-                return conta
-
-        conta = Login()
-        while conta == None:
-                print("=> Usuário não encontrado! Deseja continuar?\n"
-                "         [1] Continuar\n"
-                "         [2] Sair")
-                continuar = int(input("=> "))
-                if continuar == 1:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        conta = Login()
-                elif continuar == 2:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        break
-                        
-        return conta[0], conta[1], conta[2]
-
-name, user, password = verificarUser()
-os.system('cls' if os.name == 'nt' else 'clear')
-print(f"=> {name}!")
-
-print(password)
-password = re.sub('[\n]', '', password)
-print(password)
-
-def VerificarSenha(password):
-        def Password():
-                senha = input("=> Informe sua senha: ")
-                return senha
+                        usersCriados.append(valores[1])
+                return usersCriados
+        usersCriados = UsersCriados()
+        print(usersCriados)
+        name = input("=> Informe o seu nome: ")
+        user = input("=> Informe o user desejado: ")
         
-        senha = Password()
-        print(f"Senha: {senha}")
-        print(f"Password: {password}")
-        while senha != password:
-                print("=> Senha incorreta! Deseja continuar?\n"
-                "         [1] Continuar\n"
-                "         [2] Sair")
-                continuar = int(input("=> "))
-                if continuar == 1:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        senha = Password()
-                elif continuar == 2:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        break
-VerificarSenha(password)
+        while user in usersCriados:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(f"=> {user} já está em uso!")
+                user = input("=> Informe o user desejado: ")
+                
+        password = int(input("=> Informe a sua senha (somente números): "))
+        password2 = int(input("=> Repita a sua senha: "))
+        
+        while password != password2:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(f"=> Senhas diferentes!")
+                password = int(input("=> Informe a sua senha (somente números): "))
+                password2 = int(input("=> Repita a sua senha: "))
+                
+        return name, user, password
+name, user, password = CriarConta()
+os.system('cls' if os.name == 'nt' else 'clear')
+print(f"=> Nome: {name}")
+print(f"=> User: {user}")
+print(f"=> Senha: {password}")

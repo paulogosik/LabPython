@@ -243,3 +243,24 @@ def Clear():
 #         arquivo.write(f"\n{conta}")
 
 # AtualizarDB(conta)
+
+# EXCLUIR NA DATABASE -----------------------------------------
+def ExcluirConta(userE):
+        contas = []
+        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database copy.txt", "r+", encoding="utf8")
+        conteudo = arquivo.readlines()
+        for line in conteudo:     
+                valores = line.split(";")
+                if userE in valores:
+                        print(valores)
+                else:
+                        contas.append(valores)
+        
+        arquivo.truncate(0)
+        arquivo.seek(0)
+        for line in contas:
+                arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
+
+        return contas
+contas = ExcluirConta("paulogosik")
+print(contas)

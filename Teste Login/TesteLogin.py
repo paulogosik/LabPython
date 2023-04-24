@@ -23,21 +23,22 @@ def Clear():
     
 def VerificarSenha(password):
         def Password():
-                senha = input("=> Informe sua senha: ")
-                return senha
+            senha = input("=> Informe sua senha: ")
+            return senha
         
         senha = Password()
         while senha != password:
-                print(f"=> Senha incorreta! Deseja continuar?\n"
-                f"         {color.g}[1] Continuar{color.end}\n"
-                f"         {color.bo}{color.r}[2] Sair{color.end}")
-                continuar = input("=> ")
-                if continuar == 1:
-                        Clear()
-                        senha = Password()
-                elif continuar == 2:
-                        Clear()
-                        break
+            Clear()
+            print(f"=> Senha incorreta! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+            continuar = int(input("=> "))
+            if continuar == 1:
+                    Clear()
+                    senha = Password()
+            elif continuar == 2:
+                    Clear()
+                    break
         if senha == password:
             Clear()
 
@@ -145,6 +146,16 @@ def BuscarNames():
     
     return names
 
+def BuscarContas():
+    contas = []
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+    conteudo = arquivo.readlines()
+    for line in conteudo:
+        valores = line.split(";")
+        contas.append(valores)
+    
+    return contas
+
 def OPC_Login():
     Clear()
     name, user, password = verificarUser()
@@ -159,12 +170,71 @@ def OPC_CriarConta():
     name, user, password = CriarConta()
     conta = f"{name};{user};{password}"
     AtualizarDB(conta)
+    
+def MenuADM():
+    logs = ["sair", "clear", "names", "users", "inf", "acts"]
+    log = input(f"{color.y}>> {color.end}")
+    while log not in logs:
+        log = input(f"{color.y}>> {color.end}")
+        
+    if log == "clear":
+        Clear()
+    elif log == "names":
+        i = 1
+        for name in names:
+            print(f"    {color.bl}{i}.{color.end} {name}")
+            i += 1
+    elif log == "users":
+        i = 1
+        for user in users:
+            print(f"    {color.bl}{i}.{color.end} {user}")
+            i += 1
+    elif log == "inf":
+        Clear()
+        print(f"{color.y}>> {color.end} Funções:")
+        for log in logs:
+            print(f"   • {color.y}[{log}]{color.end}")
+    elif log == "acts":
+        i = 1
+        for conta in contas:
+            conta[2] = conta[2].strip("\n")
+            print(f"   {color.y}{i}. Nome:{color.end} {conta[0]} | "
+                  f"{color.y}User:{color.end} {conta[1]} | "
+                  f"{color.y}Senha:{color.end} {conta[2]}")
+            i += 1
+    return log
 
+def Menu(name, user, password):
+    logs = ["sair", "clear", "names", "inf", "my inf"]
+    log = input(f"{color.bl}>> {color.end}")
+    while log not in logs:
+        log = input(f"{color.bl}>> {color.end}")
+        
+    if log == "clear":
+        Clear()
+    elif log == "names":
+        i = 1
+        for name in names:
+            print(f"    {color.bl}{i}.{color.end} {name}")
+            i += 1
+    elif log == "inf":
+        Clear()
+        print(f"{color.bl}>> {color.end} Funções:")
+        for log in logs:
+            print(f"   • {color.bl}{log}{color.end}")
+    elif log == "my inf":
+        print(f"{color.bl}>> Nome:{color.end} {name} | "
+                f"{color.bl}User:{color.end} {user} | "
+                f"{color.bl}Senha:{color.end} {password}")
+        
+    return log
+    
 
 # Inicialização - Menu Inicial -----------------------
 names = BuscarNames()
 users = BuscarUsers()
 passwords = BuscarPasswords()
+contas = BuscarContas()
 print(f"==[ Bem-vindo à {color.i}{color.c}IM!{color.end}. Como posso te ajudar? ]==\n"
       f"    {color.g}[1] Login\n"
       f"    [2] Criar conta\n{color.end}"
@@ -183,7 +253,6 @@ while opc not in opcoes:
 
 if opc == 1:
     name, user, password = OPC_Login()
-    print(f"{color.g}=> Seja bem-vindo!{color.end}{color.bo} {name}{color.end}")
     
 elif opc == 2:
     OPC_CriarConta()
@@ -203,4 +272,26 @@ elif opc == 2:
         
 elif opc == 3:
     Clear()
+    exit
     breakpoint
+
+adm = False
+
+adms = ["admin", "paulogosik", "negueba"]
+
+if user in adms:
+    adm = True
+    print(f"{color.g}=> Seja bem-vindo!{color.end}{color.bo} {name}{color.end}{color.y} [ADM] {color.end}")
+else: 
+    print(f"{color.g}=> Seja bem-vindo!{color.end}{color.bo} {name}{color.end}")
+
+if adm == True:
+    log = MenuADM()
+    while log != "sair":
+        log = MenuADM()
+    Clear()
+elif adm == False:    
+    log = Menu(name, user, password)
+    while log != "sair":
+        log = Menu(name, user, password)
+    Clear()

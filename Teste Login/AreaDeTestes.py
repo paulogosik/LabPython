@@ -9,22 +9,22 @@ import re
         # print(text)
         
 # COLOCANDO COR EM TEXTO -----------------------------------------
-# class color:
-#         p = '\033[95m'
-#         c = '\033[96m'
-#         dc = '\033[36m'
-#         bl = '\033[94m'
-#         g = '\033[92m'
-#         y = '\033[93m'
-#         r = '\033[91m'
-#         bo = '\033[1m'
-#         und = '\033[4m'
-#         end = '\033[0m'
-#         i = '\x1B[3m'
+class color:
+   p = '\033[95m'; c = '\033[96m'
+   dc = '\033[36m'; bl = '\033[94m'
+   g = '\033[92m'; y = '\033[93m'
+   r = '\033[91m'; bo = '\033[1m'
+   und = '\033[4m'; end = '\033[0m'
+   i = '\x1B[3m';  w = '\033[37m'
+   
+class bg:
+    bl = '\033[40m'; r = '\033[41m'
+    g = '\033[42m'; y = '\033[43m'
+    bl = '\033[44m'; m = '\033[45m'
+    c = '\033[46m'; w = '\033[47m'
 
-# im = (f"{color.i}{color.c}Teste{color.end}")
-# print(f"The output is: {im}")
-
+def Clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # APRENDENDO A MANIPULAR ARQUIVOS .TXT -----------------------------------------
 # with open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8") as teste:
@@ -157,37 +157,89 @@ import re
 # VerificarSenha(password)
 
 # CRIAÇÃO DE CONTA -----------------------------------------
-def CriarConta():
-        def UsersCriados():
-                arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
-                conteudo = arquivo.readlines()
-                usersCriados = []
-                for line in conteudo:
-                        valores = line.split(";")
-                        usersCriados.append(valores[1])
-                return usersCriados
-        usersCriados = UsersCriados()
-        print(usersCriados)
-        name = input("=> Informe o seu nome: ")
-        user = input("=> Informe o user desejado: ")
+# def CriarConta():
+#         def UsersCriados():
+#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                 conteudo = arquivo.readlines()
+#                 usersCriados = []
+#                 for line in conteudo:
+#                         valores = line.split(";")
+#                         usersCriados.append(valores[1])
+#                 return usersCriados
+#         usersCriados = UsersCriados()
+#         print(usersCriados)
+#         name = input("=> Informe o seu nome: ")
+#         user = input("=> Informe o user desejado: ")
         
-        while user in usersCriados:
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print(f"=> {user} já está em uso!")
-                user = input("=> Informe o user desejado: ")
+#         while user in usersCriados:
+#                 os.system('cls' if os.name == 'nt' else 'clear')
+#                 print(f"=> {user} já está em uso!")
+#                 user = input("=> Informe o user desejado: ")
                 
-        password = int(input("=> Informe a sua senha (somente números): "))
-        password2 = int(input("=> Repita a sua senha: "))
+#         password = int(input("=> Informe a sua senha (somente números): "))
+#         password2 = int(input("=> Repita a sua senha: "))
         
-        while password != password2:
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print(f"=> Senhas diferentes!")
-                password = int(input("=> Informe a sua senha (somente números): "))
-                password2 = int(input("=> Repita a sua senha: "))
+#         while password != password2:
+#                 os.system('cls' if os.name == 'nt' else 'clear')
+#                 print(f"=> Senhas diferentes!")
+#                 password = int(input("=> Informe a sua senha (somente números): "))
+#                 password2 = int(input("=> Repita a sua senha: "))
                 
-        return name, user, password
-name, user, password = CriarConta()
-os.system('cls' if os.name == 'nt' else 'clear')
-print(f"=> Nome: {name}")
-print(f"=> User: {user}")
-print(f"=> Senha: {password}")
+#         return name, user, password
+# name, user, password = CriarConta()
+# os.system('cls' if os.name == 'nt' else 'clear')
+# print(f"=> Nome: {name}")
+# print(f"=> User: {user}")
+# print(f"=> Senha: {password}")
+
+# ATUALIZAR NA DATABASE -----------------------------------------
+# def CriarConta():
+#         def UsersCriados():
+#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                 conteudo = arquivo.readlines()
+#                 usersCriados = []
+#                 for line in conteudo:
+#                         valores = line.split(";")
+#                         usersCriados.append(valores[1])
+#                 return usersCriados
+#         usersCriados = UsersCriados()
+#         name = input("=> Informe o seu nome: ")
+        
+#         def User():
+#             user = input("=> Informe o user desejado: ")
+#             return user
+        
+#         user = User()
+#         user = user.lower()
+#         while user.lower() in usersCriados:
+#             print(f"=> Usuário já está em uso! Deseja continuar?\n"
+#             f"         {color.g}[1] Continuar{color.end}\n"
+#             f"         {color.bo}{color.r}[2] Sair{color.end}")
+#             continuar = int(input("=> "))
+#             if continuar == 1:
+#                     Clear()
+#                     user = User()
+#             elif continuar == 2:
+#                     Clear()
+#                     break
+                
+#         password = int(input("=> Informe a sua senha (somente números): "))
+#         password2 = int(input("=> Repita a sua senha: "))          
+#         while password != password2:
+#                 Clear()
+#                 print(f"{color.r}=> Senhas diferentes!{color.end}")
+#                 password = int(input("=> Informe a sua senha (somente números): "))
+#                 password2 = int(input("=> Repita a sua senha: "))
+#         user = user.lower()
+#         return name, user, password
+
+# Clear()
+# name, user, password = CriarConta()
+# conta = f"{name};{user};{password}"
+# print(conta)
+
+# def AtualizarDB(conta):
+#         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "a", encoding="utf8")
+#         arquivo.write(f"\n{conta}")
+
+# AtualizarDB(conta)

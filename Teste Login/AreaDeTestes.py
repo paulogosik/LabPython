@@ -1,4 +1,5 @@
 import os
+import re
 # SUBSTITUINDO CARACTERES ESPECIFICOS -----------------------------------------
         # import re
         # text = ["Ola\n", "Teste\n"]
@@ -117,5 +118,30 @@ def verificarUser():
         return conta[0], conta[1], conta[2]
 
 name, user, password = verificarUser()
-print(f"=> {name}!")
 os.system('cls' if os.name == 'nt' else 'clear')
+print(f"=> {name}!")
+
+print(password)
+password = re.sub('[\n]', '', password)
+print(password)
+
+def VerificarSenha(password):
+        def Password():
+                senha = input("=> Informe sua senha: ")
+                return senha
+        
+        senha = Password()
+        print(f"Senha: {senha}")
+        print(f"Password: {password}")
+        while senha != password:
+                print("=> Senha incorreta! Deseja continuar?\n"
+                "         [1] Continuar\n"
+                "         [2] Sair")
+                continuar = int(input("=> "))
+                if continuar == 1:
+                        os.system('cls' if os.name == 'nt' else 'clear')
+                        senha = Password()
+                elif continuar == 2:
+                        os.system('cls' if os.name == 'nt' else 'clear')
+                        break
+VerificarSenha(password)

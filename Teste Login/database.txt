@@ -2,11 +2,5 @@ Paulo Gosik;paulogosik;031204
 Guilherme Thomaz;negueba;123456
 Ana Kárita;mainha;1601
 Marlos Elias;painho;3010
-Teste;teste;123
-Teste 2;teste2;123
 Administrador;admin;457319
 Gabriel Monteiro;kreyto;kreyto0210
-GosikStorm;gosikstorm;Gosik0312
-Teste 4;teste4;123
-Teste 5;teste5;123
-Teste 3;teste3;123

@@ -16,7 +16,6 @@ class bg:
     bl = '\033[44m'; m = '\033[45m'
     c = '\033[46m'; w = '\033[47m'
     
-    
 # Criação de funções --------------------------------
 def Clear():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -65,7 +64,7 @@ def MudarSenha():
                                 conta, userE = Login()
                         elif continuar == 2:
                                 Clear()
-                                break
+                                exit()
                 return userE
 
         userE = verificarUser()
@@ -80,7 +79,75 @@ def MudarSenha():
         
         senhaAntiga = MudarSenhaDB(userE, senhaE)
         return senhaAntiga, senhaE
-    
+
+def ExcluirConta():
+        def ExcluirContaDB(userE, password):
+                contas = []
+                arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r+", encoding="utf8")
+                conteudo = arquivo.readlines()
+                for line in conteudo:     
+                        valores = line.split(";")
+                        if (userE not in valores) and (password not in valores):
+                                contas.append(valores)
+                
+                arquivo.truncate(0)
+                arquivo.seek(0)
+                for line in contas:
+                        arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
+
+                return contas
+        def VerificarSenha(password):
+                def Password():
+                        senha = input(f"{color.y}>>{color.end} Informe a senha do usuário: ")
+                        return senha
+                
+                senha = Password()
+                while senha != password:
+                        Clear()
+                        print(f"{color.y}>>{color.end} Senha incorreta! Deseja continuar?\n"
+                        f"         {color.g}[1] Continuar{color.end}\n"
+                        f"         {color.bo}{color.r}[2] Sair{color.end}")
+                        continuar = int(input(f"{color.y}>>{color.end} "))
+                        if continuar == 1:
+                                Clear()
+                                senha = Password()
+                        elif continuar == 2:
+                                Clear()
+                                exit()
+                if senha == password:
+                        Clear()
+        def verificarUser():
+                def Login():
+                        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+                        conteudo = arquivo.readlines()
+                        conta = False
+                        userE = input(f"{color.y}>>{color.end} Informe o user a ser excluído: ")
+                        for line in conteudo:
+                                valores = line.split(";")
+                                if userE == valores[1]:
+                                        password = valores[2]
+                                        conta = True
+                                        breakpoint
+                        return conta, userE, password
+                conta, userE, password = Login()
+                while conta == False:
+                        print(f"{color.y}>>{color.end} Usuário não encontrado! Deseja continuar?\n"
+                        f"         {color.g}[1] Continuar{color.end}\n"
+                        f"         {color.bo}{color.r}[2] Sair{color.end}")
+                        continuar = int(input("=> "))
+                        if continuar == 1:
+                                Clear()
+                                conta, userE = Login()
+                        elif continuar == 2:
+                                Clear()
+                                exit()
+                return userE, password
+        userE, password = verificarUser()
+        password = password.strip("\n")
+        VerificarSenha(password)
+        ExcluirContaDB(userE, password)
+        return userE
+   
 def VerificarSenha(password):
         def Password():
             senha = input("=> Informe sua senha: ")
@@ -98,10 +165,10 @@ def VerificarSenha(password):
                     senha = Password()
             elif continuar == 2:
                     Clear()
-                    break
+                    exit()
         if senha == password:
             Clear()
-
+    
 def verificarUser():
     def Login():
         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
@@ -129,7 +196,7 @@ def verificarUser():
                     conta = Login()
             elif continuar == 2:
                     Clear()
-                    break
+                    exit()
     return conta[0], conta[1], conta[2]              
 
 def CriarConta():
@@ -150,7 +217,6 @@ def CriarConta():
         
         user = User()
         user = user.lower()
-        continuarV = True
         while user.lower() in usersCriados:
             print(f"=> Usuário já está em uso! Deseja continuar?\n"
             f"         {color.g}[1] Continuar{color.end}\n"
@@ -161,17 +227,15 @@ def CriarConta():
                     user = User()
             elif continuar == 2:
                     Clear()
-                    continuarV = False
-                    break
-        if continuarV == True:
-            password = input("=> Informe a sua senha: ")
-            password2 = input("=> Repita a sua senha: ")        
-            while password != password2:
-                    Clear()
-                    print(f"{color.r}=> Senhas diferentes!{color.end}")
-                    password = input("=> Informe a sua senha: ")
-                    password2 = input("=> Repita a sua senha: ")
-            user = user.lower()
+                    exit()
+        password = input("=> Informe a sua senha: ")
+        password2 = input("=> Repita a sua senha: ")        
+        while password != password2:
+                Clear()
+                print(f"{color.r}=> Senhas diferentes!{color.end}")
+                password = input("=> Informe a sua senha: ")
+                password2 = input("=> Repita a sua senha: ")
+        user = user.lower()
         return name, user, password
 
 def AtualizarDB(conta):
@@ -234,7 +298,7 @@ def OPC_CriarConta():
     AtualizarDB(conta)
     
 def MenuADM():
-    logs = ["sair", "clear", "names", "users", "inf", "acts", "cpw"]
+    logs = ["sair", "clear", "names", "users", "inf", "acts", "cpw", "dact"]
     log = input(f"{color.y}>> {color.end}")
     while log not in logs:
         log = input(f"{color.y}>> {color.end}")
@@ -258,6 +322,7 @@ def MenuADM():
             print(f"   • {color.y}[{log}]{color.end}")
     elif log == "acts":
         i = 1
+        contas = BuscarContas()
         for conta in contas:
             conta[2] = conta[2].strip("\n")
             print(f"   {color.y}{i}. Nome:{color.end} {conta[0]} | "
@@ -271,6 +336,10 @@ def MenuADM():
         print(f"{color.y}>> Senha alterada com sucesso! {color.end}")
         print(f"{color.y}>> Senha antiga: {color.end}{senhaAntiga}")
         print(f"{color.y}>> Senha atual: {color.end}{senhaE}")
+    elif log == "dact":
+        Clear()
+        userE = ExcluirConta()
+        print(f"{color.y}>> Conta excluída com sucesso! {color.end}")
     return log
 
 def Menu(name, user, password):
@@ -337,12 +406,11 @@ elif opc == 2:
         name, user, password = OPC_Login()
     else:
         Clear()
-        breakpoint
+        exit()
         
 elif opc == 3:
     Clear()
-    exit
-    breakpoint
+    exit()
 
 adm = False
 

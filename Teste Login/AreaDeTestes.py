@@ -245,75 +245,75 @@ def Clear():
 # AtualizarDB(conta)
 
 # EXCLUIR NA DATABASE -----------------------------------------
-def ExcluirConta():
-        def ExcluirContaDB(userE, password):
-                contas = []
-                arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r+", encoding="utf8")
-                conteudo = arquivo.readlines()
-                for line in conteudo:     
-                        valores = line.split(";")
-                        if (userE not in valores) and (password not in valores):
-                                contas.append(valores)
+# def ExcluirConta():
+#         def ExcluirContaDB(userE, password):
+#                 contas = []
+#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r+", encoding="utf8")
+#                 conteudo = arquivo.readlines()
+#                 for line in conteudo:     
+#                         valores = line.split(";")
+#                         if (userE not in valores) and (password not in valores):
+#                                 contas.append(valores)
                 
-                arquivo.truncate(0)
-                arquivo.seek(0)
-                for line in contas:
-                        arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
+#                 arquivo.truncate(0)
+#                 arquivo.seek(0)
+#                 for line in contas:
+#                         arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
 
-                return contas
-        def VerificarSenha(password):
-                def Password():
-                        senha = input(f"{color.y}>>{color.end} Informe a senha do usuário: ")
-                        return senha
+#                 return contas
+#         def VerificarSenha(password):
+#                 def Password():
+#                         senha = input(f"{color.y}>>{color.end} Informe a senha do usuário: ")
+#                         return senha
                 
-                senha = Password()
-                while senha != password:
-                        Clear()
-                        print(f"{color.y}>>{color.end} Senha incorreta! Deseja continuar?\n"
-                        f"         {color.g}[1] Continuar{color.end}\n"
-                        f"         {color.bo}{color.r}[2] Sair{color.end}")
-                        continuar = int(input(f"{color.y}>>{color.end} "))
-                        if continuar == 1:
-                                Clear()
-                                senha = Password()
-                        elif continuar == 2:
-                                Clear()
-                                break
-                if senha == password:
-                        Clear()
-        def verificarUser():
-                def Login():
-                        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
-                        conteudo = arquivo.readlines()
-                        conta = False
-                        userE = input(f"{color.y}>>{color.end} Informe o user a ser excluído: ")
-                        for line in conteudo:
-                                valores = line.split(";")
-                                if userE == valores[1]:
-                                        password = valores[2]
-                                        conta = True
-                                        breakpoint
-                        return conta, userE, password
-                conta, userE, password = Login()
-                while conta == False:
-                        print(f"{color.y}>>{color.end} Usuário não encontrado! Deseja continuar?\n"
-                        f"         {color.g}[1] Continuar{color.end}\n"
-                        f"         {color.bo}{color.r}[2] Sair{color.end}")
-                        continuar = int(input("=> "))
-                        if continuar == 1:
-                                Clear()
-                                conta, userE = Login()
-                        elif continuar == 2:
-                                Clear()
-                                break
-                return userE, password
-        userE, password = verificarUser()
-        password = password.strip("\n")
-        VerificarSenha(password)
-        ExcluirContaDB(userE, password)
-        return userE
-userE = ExcluirConta()
-print(f"{color.y}>> Conta excluída com sucesso! {color.end}")
+#                 senha = Password()
+#                 while senha != password:
+#                         Clear()
+#                         print(f"{color.y}>>{color.end} Senha incorreta! Deseja continuar?\n"
+#                         f"         {color.g}[1] Continuar{color.end}\n"
+#                         f"         {color.bo}{color.r}[2] Sair{color.end}")
+#                         continuar = int(input(f"{color.y}>>{color.end} "))
+#                         if continuar == 1:
+#                                 Clear()
+#                                 senha = Password()
+#                         elif continuar == 2:
+#                                 Clear()
+#                                 break
+#                 if senha == password:
+#                         Clear()
+#         def verificarUser():
+#                 def Login():
+#                         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                         conteudo = arquivo.readlines()
+#                         conta = False
+#                         userE = input(f"{color.y}>>{color.end} Informe o user a ser excluído: ")
+#                         for line in conteudo:
+#                                 valores = line.split(";")
+#                                 if userE == valores[1]:
+#                                         password = valores[2]
+#                                         conta = True
+#                                         breakpoint
+#                         return conta, userE, password
+#                 conta, userE, password = Login()
+#                 while conta == False:
+#                         print(f"{color.y}>>{color.end} Usuário não encontrado! Deseja continuar?\n"
+#                         f"         {color.g}[1] Continuar{color.end}\n"
+#                         f"         {color.bo}{color.r}[2] Sair{color.end}")
+#                         continuar = int(input("=> "))
+#                         if continuar == 1:
+#                                 Clear()
+#                                 conta, userE = Login()
+#                         elif continuar == 2:
+#                                 Clear()
+#                                 break
+#                 return userE, password
+#         userE, password = verificarUser()
+#         password = password.strip("\n")
+#         VerificarSenha(password)
+#         ExcluirContaDB(userE, password)
+#         return userE
+# userE = ExcluirConta()
+# print(f"{color.y}>> Conta excluída com sucesso! {color.end}")
 
 # MUDANDO SENHA NA DATABASE -----------------------------------------
 # def MudarSenha():

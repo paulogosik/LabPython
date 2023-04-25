@@ -14,8 +14,8 @@ class bg:
     bl = '\033[40m'; r = '\033[41m'
     g = '\033[42m'; y = '\033[43m'
     bl = '\033[44m'; m = '\033[45m'
-    c = '\033[46m'; w = '\033[47m'
-    
+    c = '\033[46m'; w = '\033[47m' 
+      
 # Criação de funções --------------------------------
 def Clear():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -168,6 +168,65 @@ def VerificarSenha(password):
                     exit()
         if senha == password:
             Clear()
+
+def VerificarSenhaAdmin(password):
+        def Password():
+            senha = input(f"{color.y}>>{color.end} Informe sua senha: ")
+            return senha
+        
+        senha = Password()
+        while senha != password:
+            Clear()
+            print(f"{color.y}>>{color.end} Senha incorreta! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+            continuar = int(input(f"{color.y}>>{color.end} "))
+            if continuar == 1:
+                    Clear()
+                    senha = Password()
+            elif continuar == 2:
+                    Clear()
+                    exit()
+        if senha == password:
+            Clear()
+
+def verificarUserAdmin():
+    adms = BuscarADMs()
+    def Login():
+            arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+            conteudo = arquivo.readlines()
+            conta = False
+            userE = input(f"{color.y}>>{color.end} Informe o user que será Admin: ")
+            for line in conteudo:
+                    valores = line.split(";")
+                    if userE == valores[1]:
+                            conta = True
+                            breakpoint
+            return conta, userE
+    conta, userE = Login()
+    while conta == False:
+            print(f"{color.y}>>{color.end} Usuário não encontrado! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+            continuar = int(input("=> "))
+            if continuar == 1:
+                    Clear()
+                    conta, userE = Login()
+            elif continuar == 2:
+                    Clear()
+                    exit()
+    while userE in adms:
+        print(f"{color.y}>>{color.end} Usuário é um Admin! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+        continuar = int(input(f"{color.y}>>{color.end} "))
+        if continuar == 1:
+                Clear()
+                conta, userE = Login()
+        elif continuar == 2:
+                Clear()
+                exit()
+    return userE
     
 def verificarUser():
     def Login():
@@ -238,6 +297,13 @@ def CriarConta():
         user = user.lower()
         return name, user, password
 
+def CriarAdmin():
+    userE = verificarUserAdmin()
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+    adms = arquivo.readlines()
+    arquivo.writelines(f"{userE}\n")
+    return userE
+
 def AtualizarDB(conta):
         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "a", encoding="utf8")
         arquivo.write(f"\n{conta}")
@@ -282,6 +348,15 @@ def BuscarContas():
     
     return contas
 
+def BuscarADMs():
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+    conteudo = arquivo.readlines()
+    adms = []
+    for adm in conteudo:
+            adm = adm.strip("\n")
+            adms.append(adm)
+    return adms
+
 def OPC_Login():
     Clear()
     name, user, password = verificarUser()
@@ -298,7 +373,7 @@ def OPC_CriarConta():
     AtualizarDB(conta)
     
 def MenuADM():
-    logs = ["sair", "clear", "names", "users", "inf", "acts", "cpw", "dact"]
+    logs = ["sair", "clear", "names", "users", "inf", "acts", "cpw", "dact", "vadmin", "cradm", "deadm"]
     log = input(f"{color.y}>> {color.end}")
     while log not in logs:
         log = input(f"{color.y}>> {color.end}")
@@ -340,6 +415,20 @@ def MenuADM():
         Clear()
         userE = ExcluirConta()
         print(f"{color.y}>> Conta excluída com sucesso! {color.end}")
+    elif log == "vadmin":
+        Clear()
+        print(f"{color.y}>> {color.end}Admins:")
+        adms = BuscarADMs()
+        i = 1
+        for adm in adms:
+            print(f"    {color.y}{i}.{color.end} {adm}")
+            i += 1
+    elif log == "cradm":
+        Clear()
+        userE = CriarAdmin()
+        VerificarSenhaAdmin(password)
+        print(f"{color.y}>> {userE}{color.end} agora é um Admin.")
+               
     return log
 
 def Menu(name, user, password):
@@ -414,7 +503,7 @@ elif opc == 3:
 
 adm = False
 
-adms = ["admin", "paulogosik", "negueba"]
+adms = BuscarADMs()
 
 if user in adms:
     adm = True

@@ -5,3 +5,4 @@ Marlos Elias;painho;3010
 Gabriel Monteiro;kreyto;kreyto0210
 Teste;teste;teste
 Administrador;admin;admin222
+Teste 2;teste2;teste123

@@ -245,22 +245,87 @@ def Clear():
 # AtualizarDB(conta)
 
 # EXCLUIR NA DATABASE -----------------------------------------
-def ExcluirConta(userE):
-        contas = []
-        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database copy.txt", "r+", encoding="utf8")
-        conteudo = arquivo.readlines()
-        for line in conteudo:     
-                valores = line.split(";")
-                if userE in valores:
-                        print(valores)
-                else:
-                        contas.append(valores)
+# def ExcluirConta(userE):
+#         contas = []
+#         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database copy.txt", "r+", encoding="utf8")
+#         conteudo = arquivo.readlines()
+#         for line in conteudo:     
+#                 valores = line.split(";")
+#                 if userE in valores:
+#                         print(valores)
+#                 else:
+#                         contas.append(valores)
         
-        arquivo.truncate(0)
-        arquivo.seek(0)
-        for line in contas:
-                arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
+#         arquivo.truncate(0)
+#         arquivo.seek(0)
+#         for line in contas:
+#                 arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
 
-        return contas
-contas = ExcluirConta("paulogosik")
-print(contas)
+#         return contas
+# contas = ExcluirConta("paulogosik")
+# print(contas)
+def MudarSenha():
+        def MudarSenhaDB(userE, senhaE):
+                contas = []
+                arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database copy.txt", "r+", encoding="utf8")
+                conteudo = arquivo.readlines()
+                for line in conteudo:     
+                        valores = line.split(";")
+                        if userE in valores:
+                                senhaAntiga = valores[2]
+                                valores = [f"{valores[0]}", f"{valores[1]}", f"{senhaE}\n"]
+                                contas.append(valores)
+                        else:
+                                contas.append(valores)
+                
+                arquivo.truncate(0)
+                arquivo.seek(0)
+                for line in contas:
+                        arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
+
+                return senhaAntiga
+        Clear()
+        def verificarUser():
+                def Login():
+                        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+                        conteudo = arquivo.readlines()
+                        conta = False
+                        userE = input(f"{color.y}>>{color.end} Informe o user que vai ter a senha trocada: ")
+                        for line in conteudo:
+                                valores = line.split(";")
+                                if userE == valores[1]:
+                                        conta = True
+                                        breakpoint
+                        return conta, userE
+                conta, userE = Login()
+                while conta == False:
+                        print(f"{color.y}>>{color.end} Usuário não encontrado! Deseja continuar?\n"
+                        f"         {color.g}[1] Continuar{color.end}\n"
+                        f"         {color.bo}{color.r}[2] Sair{color.end}")
+                        continuar = int(input("=> "))
+                        if continuar == 1:
+                                Clear()
+                                conta, userE = Login()
+                        elif continuar == 2:
+                                Clear()
+                                break
+                return userE
+
+        userE = verificarUser()
+        password = input(f"{color.y}>>{color.end} Informe a sua senha: ")
+        password2 = input(f"{color.y}>>{color.end} Repita a sua senha: ")        
+        while password != password2:
+                Clear()
+                print(f"{color.y}>> Senhas diferentes!{color.end}")
+                password = input(f"{color.y}>>{color.end} Informe a sua senha: ")
+                password2 = input(f"{color.y}>>{color.end} Repita a sua senha: ")
+        senhaE = password
+        
+        senhaAntiga = MudarSenhaDB(userE, senhaE)
+        return senhaAntiga, senhaE
+senhaAntiga, senhaE = MudarSenha()
+senhaAntiga = senhaAntiga.strip("\n")
+Clear()
+print(f"{color.y}>> Senha alterada com sucesso! {color.end}")
+print(f"{color.y}>> Senha antiga: {color.end}{senhaAntiga}")
+print(f"{color.y}>> Senha atual: {color.end}{senhaE}")

@@ -21,6 +21,66 @@ class bg:
 def Clear():
     os.system('cls' if os.name == 'nt' else 'clear')
     
+def MudarSenha():
+        def MudarSenhaDB(userE, senhaE):
+                contas = []
+                arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r+", encoding="utf8")
+                conteudo = arquivo.readlines()
+                for line in conteudo:     
+                        valores = line.split(";")
+                        if userE in valores:
+                                senhaAntiga = valores[2]
+                                valores = [f"{valores[0]}", f"{valores[1]}", f"{senhaE}\n"]
+                                contas.append(valores)
+                        else:
+                                contas.append(valores)
+                
+                arquivo.truncate(0)
+                arquivo.seek(0)
+                for line in contas:
+                        arquivo.writelines(f"{line[0]};{line[1]};{line[2]}")
+
+                return senhaAntiga
+        Clear()
+        def verificarUser():
+                def Login():
+                        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+                        conteudo = arquivo.readlines()
+                        conta = False
+                        userE = input(f"{color.y}>>{color.end} Informe o user que vai ter a senha trocada: ")
+                        for line in conteudo:
+                                valores = line.split(";")
+                                if userE == valores[1]:
+                                        conta = True
+                                        breakpoint
+                        return conta, userE
+                conta, userE = Login()
+                while conta == False:
+                        print(f"{color.y}>>{color.end} Usuário não encontrado! Deseja continuar?\n"
+                        f"         {color.g}[1] Continuar{color.end}\n"
+                        f"         {color.bo}{color.r}[2] Sair{color.end}")
+                        continuar = int(input("=> "))
+                        if continuar == 1:
+                                Clear()
+                                conta, userE = Login()
+                        elif continuar == 2:
+                                Clear()
+                                break
+                return userE
+
+        userE = verificarUser()
+        password = input(f"{color.y}>>{color.end} Informe a sua senha: ")
+        password2 = input(f"{color.y}>>{color.end} Repita a sua senha: ")        
+        while password != password2:
+                Clear()
+                print(f"{color.y}>> Senhas diferentes!{color.end}")
+                password = input(f"{color.y}>>{color.end} Informe a sua senha: ")
+                password2 = input(f"{color.y}>>{color.end} Repita a sua senha: ")
+        senhaE = password
+        
+        senhaAntiga = MudarSenhaDB(userE, senhaE)
+        return senhaAntiga, senhaE
+    
 def VerificarSenha(password):
         def Password():
             senha = input("=> Informe sua senha: ")
@@ -90,6 +150,7 @@ def CriarConta():
         
         user = User()
         user = user.lower()
+        continuarV = True
         while user.lower() in usersCriados:
             print(f"=> Usuário já está em uso! Deseja continuar?\n"
             f"         {color.g}[1] Continuar{color.end}\n"
@@ -100,16 +161,17 @@ def CriarConta():
                     user = User()
             elif continuar == 2:
                     Clear()
+                    continuarV = False
                     break
-                
-        password = input("=> Informe a sua senha: ")
-        password2 = input("=> Repita a sua senha: ")        
-        while password != password2:
-                Clear()
-                print(f"{color.r}=> Senhas diferentes!{color.end}")
-                password = input("=> Informe a sua senha: ")
-                password2 = input("=> Repita a sua senha: ")
-        user = user.lower()
+        if continuarV == True:
+            password = input("=> Informe a sua senha: ")
+            password2 = input("=> Repita a sua senha: ")        
+            while password != password2:
+                    Clear()
+                    print(f"{color.r}=> Senhas diferentes!{color.end}")
+                    password = input("=> Informe a sua senha: ")
+                    password2 = input("=> Repita a sua senha: ")
+            user = user.lower()
         return name, user, password
 
 def AtualizarDB(conta):
@@ -172,7 +234,7 @@ def OPC_CriarConta():
     AtualizarDB(conta)
     
 def MenuADM():
-    logs = ["sair", "clear", "names", "users", "inf", "acts"]
+    logs = ["sair", "clear", "names", "users", "inf", "acts", "cpw"]
     log = input(f"{color.y}>> {color.end}")
     while log not in logs:
         log = input(f"{color.y}>> {color.end}")
@@ -202,6 +264,13 @@ def MenuADM():
                   f"{color.y}User:{color.end} {conta[1]} | "
                   f"{color.y}Senha:{color.end} {conta[2]}")
             i += 1
+    elif log == "cpw":
+        senhaAntiga, senhaE = MudarSenha()
+        senhaAntiga = senhaAntiga.strip("\n")
+        Clear()
+        print(f"{color.y}>> Senha alterada com sucesso! {color.end}")
+        print(f"{color.y}>> Senha antiga: {color.end}{senhaAntiga}")
+        print(f"{color.y}>> Senha atual: {color.end}{senhaE}")
     return log
 
 def Menu(name, user, password):
@@ -231,6 +300,7 @@ def Menu(name, user, password):
     
 
 # Inicialização - Menu Inicial -----------------------
+Clear()
 names = BuscarNames()
 users = BuscarUsers()
 passwords = BuscarPasswords()
@@ -265,7 +335,6 @@ elif opc == 2:
     if login == 1:
         Clear()
         name, user, password = OPC_Login()
-        print(f"{color.g}=> Seja bem-vindo!{color.end}{color.bo} {name}{color.end}")
     else:
         Clear()
         breakpoint

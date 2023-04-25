@@ -4,3 +4,4 @@ Ana Kárita;mainha;1601
 Marlos Elias;painho;3010
 Gabriel Monteiro;kreyto;kreyto0210
 Teste;teste;teste
+Administrador;admin;admin222

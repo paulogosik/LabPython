@@ -412,4 +412,4 @@ def Clear():
 #         adms.append(adm)
 # print(adms)
 
-# TIRAR ESPAçOS 
+# TIRAR ESPAÇOS --------------------------------

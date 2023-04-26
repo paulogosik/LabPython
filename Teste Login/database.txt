@@ -3,6 +3,4 @@ Guilherme Thomaz;negueba;guithomaz
 Ana Kárita;mainha;1601
 Marlos Elias;painho;3010
 Gabriel Monteiro;kreyto;kreyto0210
-Teste;teste;teste123
 Administrador;admin;admin222
-Teste 2;teste2;teste123

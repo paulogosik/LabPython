@@ -384,30 +384,30 @@ def Clear():
 
 # EDITAR ADMS ------------------------------------------------
 # RETIRAR USERS COMO ADM ================
-arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
-adms = arquivo.readlines()
-admsTemp = []
-userOutADM = 'admin'
-for adm in adms:
-        adm = adm.strip("\n")
-        if adm != userOutADM:
-                admsTemp.append(adm)
-arquivo.truncate(0)
-arquivo.seek(0)
-for adm in admsTemp:
-        arquivo.writelines(f"{adm}\n")
+# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+# adms = arquivo.readlines()
+# admsTemp = []
+# userOutADM = 'admin'
+# for adm in adms:
+#         adm = adm.strip("\n")
+#         if adm != userOutADM:
+#                 admsTemp.append(adm)
+# arquivo.truncate(0)
+# arquivo.seek(0)
+# for adm in admsTemp:
+#         arquivo.writelines(f"{adm}\n")
         
-# ADICIONAR USERS COMO ADM =====================
-arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
-adms = arquivo.readlines()
-userInADM = 'admin'
-arquivo.writelines(f"{userInADM}\n")
+# # ADICIONAR USERS COMO ADM =====================
+# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+# adms = arquivo.readlines()
+# userInADM = 'admin'
+# arquivo.writelines(f"{userInADM}\n")
 
-# BUSCANDO USERS ADM ===================
-arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
-conteudo = arquivo.readlines()
-adms = []
-for adm in adms:
-        adm = adm.strip("\n")
-        adms.append(adm)
-print(adms)
+# # BUSCANDO USERS ADM ===================
+# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+# conteudo = arquivo.readlines()
+# adms = []
+# for adm in adms:
+#         adm = adm.strip("\n")
+#         adms.append(adm)
+# print(adms)

@@ -227,6 +227,44 @@ def verificarUserAdmin():
                 Clear()
                 exit()
     return userE
+
+def verificarUserDelAdmin():
+    adms = BuscarADMs()
+    def Login():
+            arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+            conteudo = arquivo.readlines()
+            conta = False
+            userE = input(f"{color.y}>>{color.end} Informe o user para tirar a função Admin: ")
+            for line in conteudo:
+                    valores = line.split(";")
+                    if userE == valores[1]:
+                            conta = True
+                            breakpoint
+            return conta, userE
+    conta, userE = Login()
+    while conta == False:
+            print(f"{color.y}>>{color.end} Usuário não encontrado! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+            continuar = int(input("=> "))
+            if continuar == 1:
+                    Clear()
+                    conta, userE = Login()
+            elif continuar == 2:
+                    Clear()
+                    exit()
+    while userE not in adms:
+        print(f"{color.y}>>{color.end} Usuário não é um Admin! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+        continuar = int(input(f"{color.y}>>{color.end} "))
+        if continuar == 1:
+                Clear()
+                conta, userE = Login()
+        elif continuar == 2:
+                Clear()
+                exit()
+    return userE
     
 def verificarUser():
     def Login():
@@ -298,13 +336,71 @@ def CriarConta():
         return name, user, password
 
 def CriarAdmin():
+    def VerificarSenhaAdmin(password):
+        def Password():
+            senha = input(f"{color.y}>>{color.end} Informe sua senha: ")
+            return senha
+        senha = Password()
+        while senha != password:
+            Clear()
+            print(f"{color.y}>>{color.end} Senha incorreta! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+            continuar = int(input(f"{color.y}>>{color.end} "))
+            if continuar == 1:
+                    Clear()
+                    senha = Password()
+            elif continuar == 2:
+                    Clear()
+                    exit()
+        if senha == password:
+            Clear()
     userE = verificarUserAdmin()
+    VerificarSenhaAdmin(password)
     arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
     adms = arquivo.readlines()
     arquivo.writelines(f"{userE}\n")
     return userE
 
+def DeleteAdmin():
+    def VerificarSenhaAdmin(password):
+        def Password():
+            senha = input(f"{color.y}>>{color.end} Informe sua senha: ")
+            return senha
+        senha = Password()
+        while senha != password:
+            Clear()
+            print(f"{color.y}>>{color.end} Senha incorreta! Deseja continuar?\n"
+            f"         {color.g}[1] Continuar{color.end}\n"
+            f"         {color.bo}{color.r}[2] Sair{color.end}")
+            continuar = int(input(f"{color.y}>>{color.end} "))
+            if continuar == 1:
+                    Clear()
+                    senha = Password()
+            elif continuar == 2:
+                    Clear()
+                    exit()
+        if senha == password:
+            Clear()
+    userE = verificarUserDelAdmin()
+    VerificarSenhaAdmin(password)
+    arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+    adms = arquivo.readlines()
+    admsTemp = []
+    for adm in adms:
+            adm = adm.strip("\n")
+            if adm != userE:
+                    admsTemp.append(adm)
+    arquivo.truncate(0)
+    arquivo.seek(0)
+    for adm in admsTemp:
+            arquivo.writelines(f"{adm}\n")
+    return userE
+
 def AtualizarDB(conta):
+        arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r+", encoding="utf8")
+        arquivo.close()
+        
         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "a", encoding="utf8")
         arquivo.write(f"\n{conta}")
 
@@ -426,8 +522,11 @@ def MenuADM():
     elif log == "cradm":
         Clear()
         userE = CriarAdmin()
-        VerificarSenhaAdmin(password)
         print(f"{color.y}>> {userE}{color.end} agora é um Admin.")
+    elif log == "deadm":
+        Clear()
+        userE = DeleteAdmin()
+        print(f"{color.y}>> {userE}{color.end} não é mais um Admin.")
                
     return log
 

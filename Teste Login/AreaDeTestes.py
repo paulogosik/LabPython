@@ -411,3 +411,5 @@ def Clear():
 #         adm = adm.strip("\n")
 #         adms.append(adm)
 # print(adms)
+
+# TIRAR ESPAçOS 

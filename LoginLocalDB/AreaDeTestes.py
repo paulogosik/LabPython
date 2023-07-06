@@ -27,16 +27,16 @@ def Clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 # APRENDENDO A MANIPULAR ARQUIVOS .TXT -----------------------------------------
-# with open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8") as teste:
+# with open("public/database.txt", "r", encoding="utf8") as teste:
 #     conteudo = teste.readlines()
 #     conteudo.append("\nteste;123")
 
-# teste = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "w", encoding="utf8")
+# teste = open("public/database.txt", "w", encoding="utf8")
 # teste.writelines(conteudo)
 # teste.close()
 
 # ATRIBUINDO ElEMENTOS DE UMA LISTA À VARIÁVEIS -----------------------------------------
-# with open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8") as database:
+# with open("public/database.txt", "r", encoding="utf8") as database:
 #     banco = database.readlines()
 # users = []
 # passwords = []
@@ -51,7 +51,7 @@ def Clear():
 # print(passwords)
 
 # passwords = []
-# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+# arquivo = open("public/database.txt", "r", encoding="utf8")
 # conteudo = arquivo.readlines()
 # for line in conteudo:
 #         valores = line.split(";")
@@ -96,7 +96,7 @@ def Clear():
 # BUSCAR DADOS RELACIONADOS [USER, SENHA] -----------------------------------------
 # def verificarUser():
 #         def Login():
-#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                 arquivo = open("public/database.txt", "r", encoding="utf8")
 #                 conteudo = arquivo.readlines()
 #                 conta = None
 #                 senha = None
@@ -159,7 +159,7 @@ def Clear():
 # CRIAÇÃO DE CONTA -----------------------------------------
 # def CriarConta():
 #         def UsersCriados():
-#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                 arquivo = open("public/database.txt", "r", encoding="utf8")
 #                 conteudo = arquivo.readlines()
 #                 usersCriados = []
 #                 for line in conteudo:
@@ -195,7 +195,7 @@ def Clear():
 # ATUALIZAR NA DATABASE -----------------------------------------
 # def CriarConta():
 #         def UsersCriados():
-#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                 arquivo = open("public/database.txt", "r", encoding="utf8")
 #                 conteudo = arquivo.readlines()
 #                 usersCriados = []
 #                 for line in conteudo:
@@ -239,7 +239,7 @@ def Clear():
 # print(conta)
 
 # def AtualizarDB(conta):
-#         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "a", encoding="utf8")
+#         arquivo = open("public/database.txt", "a", encoding="utf8")
 #         arquivo.write(f"\n{conta}")
 
 # AtualizarDB(conta)
@@ -248,7 +248,7 @@ def Clear():
 # def ExcluirConta():
 #         def ExcluirContaDB(userE, password):
 #                 contas = []
-#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r+", encoding="utf8")
+#                 arquivo = open("public/database.txt", "r+", encoding="utf8")
 #                 conteudo = arquivo.readlines()
 #                 for line in conteudo:     
 #                         valores = line.split(";")
@@ -283,7 +283,7 @@ def Clear():
 #                         Clear()
 #         def verificarUser():
 #                 def Login():
-#                         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                         arquivo = open("public/database.txt", "r", encoding="utf8")
 #                         conteudo = arquivo.readlines()
 #                         conta = False
 #                         userE = input(f"{color.y}>>{color.end} Informe o user a ser excluído: ")
@@ -319,7 +319,7 @@ def Clear():
 # def MudarSenha():
 #         def MudarSenhaDB(userE, senhaE):
 #                 contas = []
-#                 arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database copy.txt", "r+", encoding="utf8")
+#                 arquivo = open("public/database copy.txt", "r+", encoding="utf8")
 #                 conteudo = arquivo.readlines()
 #                 for line in conteudo:     
 #                         valores = line.split(";")
@@ -339,7 +339,7 @@ def Clear():
 #         Clear()
 #         def verificarUser():
 #                 def Login():
-#                         arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/database.txt", "r", encoding="utf8")
+#                         arquivo = open("public/database.txt", "r", encoding="utf8")
 #                         conteudo = arquivo.readlines()
 #                         conta = False
 #                         userE = input(f"{color.y}>>{color.end} Informe o user que vai ter a senha trocada: ")
@@ -384,7 +384,7 @@ def Clear():
 
 # EDITAR ADMS ------------------------------------------------
 # RETIRAR USERS COMO ADM ================
-# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+# arquivo = open("public/adms.txt", "r+", encoding="utf8")
 # adms = arquivo.readlines()
 # admsTemp = []
 # userOutADM = 'admin'
@@ -398,13 +398,13 @@ def Clear():
 #         arquivo.writelines(f"{adm}\n")
         
 # # ADICIONAR USERS COMO ADM =====================
-# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+# arquivo = open("public/adms.txt", "r+", encoding="utf8")
 # adms = arquivo.readlines()
 # userInADM = 'admin'
 # arquivo.writelines(f"{userInADM}\n")
 
 # # BUSCANDO USERS ADM ===================
-# arquivo = open("//10.8.0.37/usuarios$/109103/Meus Documentos/testes/LabPython/Teste Login/adms.txt", "r+", encoding="utf8")
+# arquivo = open("public/adms.txt", "r+", encoding="utf8")
 # conteudo = arquivo.readlines()
 # adms = []
 # for adm in adms:

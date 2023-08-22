@@ -15,12 +15,6 @@ class color:
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-# Characters tuples ---------------------------
-especialChar = ["@", "!", "#", "$", "%", "*", "(", ")", "_"]
-upperChar = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-lowerChar = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-numChar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-
 # Run ---------------------------
 clear()
 size = int(input(f"{color.i}=> Inform the size of the password: {color.end}"))

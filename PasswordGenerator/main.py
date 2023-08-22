@@ -1,5 +1,6 @@
 # Imports ---------------------------
 import GeneratingPassword # type: ignore
+import os
 
 # Class ---------------------------
 class color:
@@ -9,6 +10,10 @@ class color:
    r = '\033[91m'; bo = '\033[1m'
    und = '\033[4m'; end = '\033[0m'
    i = '\x1B[3m';  w = '\033[37m'
+   
+# Functions ---------------------------
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Characters tuples ---------------------------
 especialChar = ["@", "!", "#", "$", "%", "*", "(", ")", "_"]
@@ -17,6 +22,7 @@ lowerChar = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n
 numChar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 # Run ---------------------------
-size = int(input(f"=> Inform the size of the password: "))
+clear()
+size = int(input(f"{color.i}=> Inform the size of the password: {color.end}"))
 
 GeneratingPassword.generate_password(size)

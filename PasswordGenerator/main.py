@@ -32,7 +32,7 @@ strongPassword = GeneratingPassword.generate_strong_password(size)
 clear()
 result = 0
 for i in tqdm(range(3), ncols=80, unit="Mb"):
-    time.sleep(1)
+    time.sleep(0.5)
     result += i
 
 clear()

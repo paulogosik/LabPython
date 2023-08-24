@@ -80,20 +80,20 @@ def GoogleSearch():
 while True:
     Clear()
     print(f"{color.r}{color.bo}==================({char.key}< CONNECT_WEB >{char.ckey})=================={color.end}")
-    print(f"{color.y}>>{color.end}    {color.i}{color.g}[cw --open -ggl]{color.end} To open the Google website\n"
-          f"{color.y}>>{color.end}    {color.i}{color.g}[cw --search -ggl]{color.end} To search something on Google\n"
-          f"{color.y}>>{color.end}    {color.i}{color.g}[cw --open -yt]{color.end} To open the YouTube website\n"
-          f"{color.y}>>{color.end}    {color.i}{color.g}[cw --search -yt]{color.end} To search something on YouTube")
+    print(f"{color.y}>>{color.end}    {color.i}{color.g}[cw open -ggl]{color.end} To open the Google website\n"
+          f"{color.y}>>{color.end}    {color.i}{color.g}[cw search -ggl]{color.end} To search something on Google\n"
+          f"{color.y}>>{color.end}    {color.i}{color.g}[cw open -yt]{color.end} To open the YouTube website\n"
+          f"{color.y}>>{color.end}    {color.i}{color.g}[cw search -yt]{color.end} To search something on YouTube")
     opc = input(f"{color.y}{color.i}>> ")
     
     if opc == "exit":
         Clear()
         break
-    elif opc == "cw --open -ggl":
+    elif opc == "cw open -ggl":
         webbrowser.open_new_tab("https://google.com")
-    elif opc == "cw --search -ggl":
+    elif opc == "cw search -ggl":
         GoogleSearch()
-    elif opc == "cw --open -yt":
+    elif opc == "cw open -yt":
         webbrowser.open_new_tab("https://youtube.com")
-    elif opc == "cw --search -yt":
+    elif opc == "cw search -yt":
         YouTubeSearch()

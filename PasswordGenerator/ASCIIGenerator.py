@@ -1,3 +1,5 @@
 import string
-a = list(string.ascii_lowercase)
+
+# Method 1
+a = list(string.printable)
 print(a)

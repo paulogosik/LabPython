@@ -1,7 +1,7 @@
 # Imports ---------------------------
 from GeneratingPassword import *  # type: ignore
 import os
-from tqdm import tqdm
+# from tqdm import tqdm
 import time
 
 
@@ -43,10 +43,10 @@ while True:
     impossible2 = encode_password(strongPassword)
 
     clear()
-    result = 0
-    for i in tqdm(range(3), ncols=80, unit="Mb"):
-        time.sleep(0.5)
-        result += i
+    # result = 0
+    # for i in tqdm(range(3), ncols=80, unit="Mb"):
+    #     time.sleep(0.5)
+    #     result += i
 
     clear()
     weak = f"{color.r}Weak{color.end}"

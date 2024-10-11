@@ -6,7 +6,7 @@ config = {
     'user': 'root',
     'password': 'root',
     'host': 'localhost',
-    'database': 'teste',
+    'database': 'localcmd',
     'raise_on_warnings': True
 }
 

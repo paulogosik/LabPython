@@ -23,6 +23,4 @@ def criar_senha() -> str:
     while True:
         senha = str(input(f"*A senha deve conter no mínimo: 1 letra maiúscula, 1 número e 1 caracter especial.*\n=>Insira a sua senha: "))
         if verif_maiuscula(senha) and verif_numero(senha) and verif_char_especial(senha):
-            break
-
-    return senha
+            return encode_password(senha)

@@ -4,15 +4,15 @@ import public.py.functions as func
 import public.py.db as db
 
 # Configurações para o MySQL ============================
-config = {
-    'user': 'root',
-    'password': 'root',
-    'host': 'localhost',
-    'database': 'teste',
-    'raise_on_warnings': True
-}
+# config = {
+#     'user': 'root',
+#     'password': 'root',
+#     'host': 'localhost',
+#     'database': 'teste',
+#     'raise_on_warnings': True
+# }
 
-conn = mysql.connector.connect(**config)
+# conn = mysql.connector.connect(**config)
 
 # Exceções para erros ============================
 # try:
@@ -51,22 +51,38 @@ conn = mysql.connector.connect(**config)
 #     return senha
         
 
-# Criando um usuário ============================= //TODO 1
-def criar_usuario_comum():
-    nome = str(input(f"=> Informe o seu nome: "))
-    usuario = str(input(f"=> Informe o seu nome de usuário: "))
-    senha = sec.criar_senha()
+# Criando um usuário =============================
+# def criar_usuario_comum():
+#     nome = str(input(f"=> Informe o seu nome: "))
+#     print("----------------------")
+#     usuario = func.criar_nome_usuario()
+#     print("----------------------")
+#     senha = sec.criar_senha()
     
-    db.insert_usuario_comum(nome, usuario, senha)
+#     db.insert_usuario_comum(nome, usuario, senha)
+#     print("----------------------")
+#     print(f"Usuário [{usuario}] criado com sucesso!")
+    
+
+# def criar_nome_usuario() -> str:
+#     while True:
+#         usuario = str(input(f"=> Informe o seu nome de usuário: "))
+        
+#         if db.verif_nome_usuario(usuario):
+#             print("Este nome de usuário já esta em uso!")
+#         else:
+#             return usuario
     
 
 # Parte para testes ========================
 func.clear()
+func.criar_usuario_comum()
 
 
 # Comentários -=-=--=-=-=-==-==-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-'''
-    //TODO 1: 
-    Estou no meio do desenvolvimento da função 'criar_usuario_comum'.
-    Preciso colocar uma validação para ver se o usuário não existe.
-'''
+"""
+    //TODO:
+    - Apenas foi criado a inserção de usuário, falta criar as outras operações como DELETE e UPDATE.
+    - Também falta adicionar alguns comentários explicativos de funções e blocos de código!
+    
+"""

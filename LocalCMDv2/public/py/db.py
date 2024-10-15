@@ -30,6 +30,24 @@ def verif_nome_usuario(usuario: str) -> bool:
         return True
     else:
         return False
+    
+    
+def verif_admin(usuario: str) -> bool:
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    
+    query = """SELECT funcao FROM users_homol WHERE usuario = %s"""
+    argumentos = (usuario,)
+    cursor.execute(query, argumentos)
+    
+    resultados = cursor.fetchall()
+    for row in resultados:
+        funcao = row[0]
+        
+    if funcao == "admin":
+        return True
+    else:
+        return False
 
 
 def insert_usuario_comum(nome: str, usuario: str, senha: str):
@@ -44,3 +62,6 @@ def insert_usuario_comum(nome: str, usuario: str, senha: str):
         
     cursor.close()
     conn.close()
+    
+
+def promover_para_admin() #//TODO: Promover para admin, tem que terminar de fazer.

@@ -13,7 +13,7 @@ import public.py.db as db
 # }
 
 # conn = mysql.connector.connect(**config)
-
+ 
 # Exceções para erros ============================
 # try:
 #     conn = mysql.connector.connect(**config)
@@ -76,7 +76,8 @@ import public.py.db as db
 
 # Parte para testes ========================
 func.clear()
-func.criar_usuario_comum()
+# func.criar_usuario_comum()
+db.verif_admin("paulogosik")
 
 
 # Comentários -=-=--=-=-=-==-==-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -84,5 +85,7 @@ func.criar_usuario_comum()
     //TODO:
     - Apenas foi criado a inserção de usuário, falta criar as outras operações como DELETE e UPDATE.
     - Também falta adicionar alguns comentários explicativos de funções e blocos de código!
+    - Finalizar a função de promover para admin [db].
+    - Finalizar a função de criar admin [functions].
     
 """

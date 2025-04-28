@@ -62,27 +62,99 @@
 # -----------------------------------------------------------------------------------------------
     # Usando classe para organizar melhor
     
+# import customtkinter as ctk
+
+# class App(ctk.CTk):
+#     def __init__(self):
+#         super().__init__()
+        
+#         self.geometry("1000x600")
+#         self.title("My App")
+#         self.grid_columnconfigure(0, weight=1)
+#         self.grid_rowconfigure((0, 1), weight=2)
+
+#         # checkbox1 = ctk.CTkCheckBox(self, text="Checkbox 1")
+#         # checkbox1.grid(row=0, column=1, padx=20, pady=(0, 20), sticky="w")
+#         # checkbox2 = ctk.CTkCheckBox(self, text="Checkbox 2")
+#         # checkbox2.grid(row=1, column=1, padx=20, pady=(0, 20), sticky="w")
+        
+#         self.checkbox_frame = ctk.CTkFrame(self)
+#         self.checkbox_frame.grid(row=0, column=0, padx=20, pady=(10, 10), sticky="s")
+        
+#         self.checkbox_1 = ctk.CTkCheckBox(self.checkbox_frame, text="CheckBox 1")
+#         self.checkbox_1.grid(row=0, column=0, padx=20, pady=(10, 10))
+        
+#         self.checkbox_2 = ctk.CTkCheckBox(self.checkbox_frame, text="CheckBox 2")
+#         self.checkbox_2.grid(row=1, column=0, padx=10, pady=(10, 10))
+        
+#         btn_print = ctk.CTkButton(self, text="Printar 'teste'", command=self.botao_print)
+#         btn_print.grid(row=1, column=0, padx=20, pady=20, sticky="n")
+        
+        
+#     def botao_print(self) -> None:
+#         print("teste")
+        
+# app = App()
+# app.mainloop()        
+
+
+# -----------------------------------------------------------------------------------------------
+
 import customtkinter as ctk
+
+class FrameCheckboxes(ctk.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+        
+        self.checkbox_1 = ctk.CTkCheckBox(self, text="CheckBox 1")
+        self.checkbox_1.value = 1
+        self.checkbox_1.grid(row=0, column=0, padx=10, pady=(10, 0))
+        
+        self.checkbox_2 = ctk.CTkCheckBox(self, text="CheckBox 2")
+        self.checkbox_2.value = 2
+        self.checkbox_2.grid(row=1, column=0, padx=10, pady=(10, 0))
+        
+        self.checkbox_3 = ctk.CTkCheckBox(self, text="CheckBox 3")
+        self.checkbox_3.value = 3
+        self.checkbox_3.grid(row=2, column=0, padx=10, pady=10)
+        
+        
+    def get(self):
+        checkboxes_marcadas = []
+        
+        if self.checkbox_1.get() == 1:
+            checkboxes_marcadas.append(self.checkbox_1.value) #ou poderia usar checkbox_1.cget("text") para pegar o texto do cb
+        if self.checkbox_2.get() == 1:
+            checkboxes_marcadas.append(self.checkbox_2.value)
+        if self.checkbox_3.get() == 1:
+            checkboxes_marcadas.append(self.checkbox_3.value)
+        
+        return checkboxes_marcadas
+    
 
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         
-        def botao_print() -> None:
-            print("teste")
-        
-        self.geometry("1000x600")
         self.title("My App")
-        self.grid_columnconfigure((0, 1), weight=1)
-
-        btn_print = ctk.CTkButton(self, text="Printar 'teste'", command=botao_print)
-        btn_print.grid(row=0, column=0, padx=20, pady=20, columnspan=2)
-
-        checkbox1 = ctk.CTkCheckBox(self, text="Checkbox 1")
-        checkbox1.grid(row=1, column=0, padx=20, pady=(0, 20))
-        checkbox2 = ctk.CTkCheckBox(self, text="Checkbox 2")
-        checkbox2.grid(row=1, column=1, padx=20, pady=(0, 20))
+        self.geometry("500x300")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure((0, 1), weight=1)
         
+        self.frame_checkbox = FrameCheckboxes(self)
+        self.frame_checkbox.grid(row=0, column=0, padx=10, pady=(10, 10), sticky="s")
+        
+        self.botao_print = ctk.CTkButton(self, text="Enviar", command=self.botao_print)
+        self.botao_print.grid(row=1, column=0, padx=10, pady=10, sticky="n")
+    
+    
+    def botao_print(self) -> None:
+        print(f"Checboxes Marcadas: {self.frame_checkbox.get()}")
+    
+
 app = App()
-app.mainloop()        
-        
+app.mainloop()
+
+
+# -----------------------------------------------------------------------------------------------
+

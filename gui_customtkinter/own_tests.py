@@ -61,6 +61,8 @@
 import customtkinter as ctk
 import bcrypt
 from pymongo import MongoClient, collection
+from pymongo.errors import DuplicateKeyError
+import re
 
 def connect_mongodb() -> collection.Collection:
     uri = "mongodb+srv://root:root123@testdb.abni7vh.mongodb.net/"
@@ -93,18 +95,33 @@ class FrameCriarConta(ctk.CTkFrame):
         self.bota_facalogin = ctk.CTkButton(
             self,
             text="Já tem conta? Faça Login",
-            width=240, fg_color="transparent",
+            fg_color="transparent",
             hover_color="gray14",
             command=master.botao_facalogin,
             text_color="#6495ED"
             )
         self.bota_facalogin.grid(row=5, column=0, pady=(40, 0))
         
-        self.botao_enviar = ctk.CTkButton(self, text="Criar conta", command=master.botao_criarconta, width=240, fg_color="#6959CD", hover_color="#483D8B")
+        self.botao_enviar = ctk.CTkButton(
+            self,
+            text="Criar conta",
+            command=master.botao_criarconta,
+            width=240,
+            fg_color="#6959CD",
+            hover_color="#483D8B"
+            )
         self.botao_enviar.grid(row=6, column=0)
         
         self.label_aviso = ctk.CTkLabel(self, text="", text_color="red")
         self.label_aviso.grid(row=7, column=0)
+       
+       
+    def verificar_senha(self) -> bool:
+        tem_maiuscula = re.search(r'[A-Z]', self.senha.get())
+        tem_numero = re.search(r'[0-9]', self.senha.get())
+        tem_especial = re.search(r'[!@#$%^&*(),.?":{}|<>]', self.senha.get())
+
+        return all([tem_maiuscula, tem_numero, tem_especial])
        
        
     def senha_hashed(self) -> str:
@@ -130,7 +147,7 @@ class App(ctk.CTk):
         self.title("Criar Conta")
         self.geometry("1280x720")
         # self.state("zoomed")
-        self.iconbitmap("C:/Users/pgosi/OneDrive/Documentos/LabPython/gui_customtkinter/img/urano.ico")
+        self.iconbitmap("C:/Users/Teste/Documents/LabPython/gui_customtkinter/img/urano.ico")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
         
@@ -143,19 +160,34 @@ class App(ctk.CTk):
 
         
     def botao_criarconta(self) -> None:
-        if self.frame_criarconta.senha != self.frame_criarconta.senha2:
-            self.frame_criarconta.label_aviso.configure(text="As senhas não são iguais!")
+        usuario = self.frame_criarconta.usuario.get().strip()
+        email = self.frame_criarconta.email.get().strip()
+        nome = self.frame_criarconta.nome.get().strip()
+        senha1 = self.frame_criarconta.senha.get().strip()
+        senha2 = self.frame_criarconta.senha2.get().strip()
+        
+        # Verifica se todos os campos estão preenchidos
+        if not usuario or not email or not nome or not senha1 or not senha2:
+            self.frame_criarconta.label_aviso.configure(text="Preencha todos os campos!", text_color="red")
             return
         
+        # Verifica se todos os requisitos de senha estão válidos
+        if not self.frame_criarconta.verificar_senha():
+            self.frame_criarconta.label_aviso.configure(text="A senha deve conter letra maiúscula, número e caracter especial.",text_color="red")
+            return
+        
+        # Verifica se as duas senhas são iguais
+        if self.frame_criarconta.senha.get() != self.frame_criarconta.senha2.get():
+            self.frame_criarconta.label_aviso.configure(text="As senhas não são iguais!", text_color="red")
+            return
+        
+        # Tenta a conexão com o banco e cria/acusa o erro
         try:
             colecao.insert_one(self.frame_criarconta.get())
-            print("Usuário criado com sucesso!")
+            self.frame_criarconta.label_aviso.configure(text="Usuário criado com sucesso!", text_color="green")
             
-        except Exception as e:
-            if hasattr(e, 'code') and e.code == 11000:
-                print("Usuário já existe!")
-            else:
-                print(f"Erro: {e}")
+        except DuplicateKeyError as e:
+            self.frame_criarconta.label_aviso.configure(text="Este nome de usuário já existe!", text_color="red")
         
         
 colecao = connect_mongodb()

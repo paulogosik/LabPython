@@ -57,6 +57,20 @@
 
 
 # ------------------------------------------------------------------------------
+# def verificar_senha(self) -> bool:
+#     tem_maiuscula = re.search(r'[A-Z]', self.senha.get())
+#     tem_numero = re.search(r'[0-9]', self.senha.get())
+#     tem_especial = re.search(r'[!@#$%^&*(),.?":{}|<>]', self.senha.get())
+
+#     return all([tem_maiuscula, tem_numero, tem_especial])
+    
+# Verifica se todos os requisitos de senha estão válidos
+# if not self.frame_criarconta.verificar_senha():
+#     self.frame_criarconta.label_aviso.configure(text="A senha deve conter letra maiúscula, número e caracter especial.",text_color="red")
+#     return
+    
+    
+# ------------------------------------------------------------------------------
 
 import customtkinter as ctk
 import bcrypt
@@ -73,7 +87,7 @@ def connect_mongodb() -> collection.Collection:
 
 class FrameCriarConta(ctk.CTkFrame):
     def __init__(self, master):
-        super().__init__(master, fg_color="transparent")
+        super().__init__(master, fg_color="gray10")
         
         self.grid_columnconfigure(0, weight=1)
         
@@ -116,14 +130,6 @@ class FrameCriarConta(ctk.CTkFrame):
         self.label_aviso.grid(row=7, column=0)
        
        
-    def verificar_senha(self) -> bool:
-        tem_maiuscula = re.search(r'[A-Z]', self.senha.get())
-        tem_numero = re.search(r'[0-9]', self.senha.get())
-        tem_especial = re.search(r'[!@#$%^&*(),.?":{}|<>]', self.senha.get())
-
-        return all([tem_maiuscula, tem_numero, tem_especial])
-       
-       
     def senha_hashed(self) -> str:
         senha = self.senha.get().encode("utf-8")
         return bcrypt.hashpw(senha, bcrypt.gensalt())
@@ -147,12 +153,12 @@ class App(ctk.CTk):
         self.title("Criar Conta")
         self.geometry("1280x720")
         # self.state("zoomed")
-        self.iconbitmap("C:/Users/Teste/Documents/LabPython/gui_customtkinter/img/urano.ico")
-        self.grid_columnconfigure(0, weight=1)
+        self.iconbitmap("C:/Users/Teste/Documents/LabPython/gui_customtkinter/img/icon.ico")
+        self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(0, weight=1)
         
         self.frame_criarconta = FrameCriarConta(self)
-        self.frame_criarconta.grid(row=0, column=0)
+        self.frame_criarconta.grid(row=0, column=1)
 
 
     def botao_facalogin(self) -> None:
@@ -169,11 +175,6 @@ class App(ctk.CTk):
         # Verifica se todos os campos estão preenchidos
         if not usuario or not email or not nome or not senha1 or not senha2:
             self.frame_criarconta.label_aviso.configure(text="Preencha todos os campos!", text_color="red")
-            return
-        
-        # Verifica se todos os requisitos de senha estão válidos
-        if not self.frame_criarconta.verificar_senha():
-            self.frame_criarconta.label_aviso.configure(text="A senha deve conter letra maiúscula, número e caracter especial.",text_color="red")
             return
         
         # Verifica se as duas senhas são iguais

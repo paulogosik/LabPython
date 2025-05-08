@@ -252,101 +252,101 @@
 
 # -----------------------------------------------------------------------------------------------
 
-import customtkinter as ctk
+# import customtkinter as ctk
 
-class FrameRadioButton(ctk.CTkFrame):
-    def __init__(self, master, titulo, textos):
-        super().__init__(master)
-        self.titulo = titulo
-        self.textos = textos
-        self.radiobuttons = []
-        self.var = ctk.StringVar(value="")
+# class FrameRadioButton(ctk.CTkFrame):
+#     def __init__(self, master, titulo, textos):
+#         super().__init__(master)
+#         self.titulo = titulo
+#         self.textos = textos
+#         self.radiobuttons = []
+#         self.var = ctk.StringVar(value="")
         
-        self.grid_columnconfigure(0, weight=1)
+#         self.grid_columnconfigure(0, weight=1)
         
-        self.titulo_label = ctk.CTkLabel(self, text=self.titulo, fg_color="gray30", corner_radius=6)
-        self.titulo_label.grid(row=0, column=0, padx=5, pady=(5, 0), sticky="nsew")
+#         self.titulo_label = ctk.CTkLabel(self, text=self.titulo, fg_color="gray30", corner_radius=6)
+#         self.titulo_label.grid(row=0, column=0, padx=5, pady=(5, 0), sticky="nsew")
         
-        for i, texto in enumerate(textos):
-            radiobtn = ctk.CTkRadioButton(self, text=texto, value=f"rbtn{i+1}", variable=self.var)
-            radiobtn.grid(row=i+1, column=0, padx=10, pady=10, sticky="w")
-            self.radiobuttons.append(radiobtn)
+#         for i, texto in enumerate(textos):
+#             radiobtn = ctk.CTkRadioButton(self, text=texto, value=f"rbtn{i+1}", variable=self.var)
+#             radiobtn.grid(row=i+1, column=0, padx=10, pady=10, sticky="w")
+#             self.radiobuttons.append(radiobtn)
             
     
-    def get(self):
-        return self.var.get()
+#     def get(self):
+#         return self.var.get()
     
     
-    def set(self, valor):
-        self.var.set(valor)
+#     def set(self, valor):
+#         self.var.set(valor)
     
     
-class FrameCheckbox(ctk.CTkFrame):
-    def __init__(self, master, titulo, textos):
-        super().__init__(master)
-        self.titulo = titulo
-        self.textos = textos
-        self.checkboxes = []
+# class FrameCheckbox(ctk.CTkFrame):
+#     def __init__(self, master, titulo, textos):
+#         super().__init__(master)
+#         self.titulo = titulo
+#         self.textos = textos
+#         self.checkboxes = []
         
-        self.grid_columnconfigure(0, weight=1)
+#         self.grid_columnconfigure(0, weight=1)
         
         
-class Frame_ScrollCheckbox(ctk.CTkScrollableFrame):
-    def __init__(self, master, titulo, textos):
-        super().__init__(master, label_text=titulo)
-        self.textos = textos
-        self.checkboxes = []
+# class Frame_ScrollCheckbox(ctk.CTkScrollableFrame):
+#     def __init__(self, master, titulo, textos):
+#         super().__init__(master, label_text=titulo)
+#         self.textos = textos
+#         self.checkboxes = []
         
-        self.grid_columnconfigure(0, weight=1)
+#         self.grid_columnconfigure(0, weight=1)
         
-        for i, texto in enumerate(self.textos):
-            checkbox = ctk.CTkCheckBox(self, text=texto)
-            checkbox.value = f"cbx{i+1}"
-            checkbox.grid(row=i, column=0, padx=10, pady=(10, 0), sticky="w")
-            self.checkboxes.append(checkbox)
+#         for i, texto in enumerate(self.textos):
+#             checkbox = ctk.CTkCheckBox(self, text=texto)
+#             checkbox.value = f"cbx{i+1}"
+#             checkbox.grid(row=i, column=0, padx=10, pady=(10, 0), sticky="w")
+#             self.checkboxes.append(checkbox)
             
             
-    def get(self):
-        checkboxes_marcadas = []
-        for checkbox in self.checkboxes:
-            if checkbox.get() == 1:
-                checkboxes_marcadas.append(checkbox.value)
+#     def get(self):
+#         checkboxes_marcadas = []
+#         for checkbox in self.checkboxes:
+#             if checkbox.get() == 1:
+#                 checkboxes_marcadas.append(checkbox.value)
                 
-        return checkboxes_marcadas
+#         return checkboxes_marcadas
     
 
-class App(ctk.CTk):
-    def __init__(self):
-        super().__init__()
+# class App(ctk.CTk):
+#     def __init__(self):
+#         super().__init__()
         
-        self.title("My App")
-        self.geometry("800x400")
-        self.grid_columnconfigure((0, 1), weight=1)
-        self.grid_rowconfigure((0, 1), weight=1)
+#         self.title("My App")
+#         self.geometry("800x400")
+#         self.grid_columnconfigure((0, 1), weight=1)
+#         self.grid_rowconfigure((0, 1), weight=1)
         
-        self.textos = [
-            "Valor 1",
-            "Valor 2",
-            "Valor 3",
-            "Valor 4",
-            "Valor 5",
-            "Valor 6",
-            "Valor 7",
-            "Valor 8",
-            "Valor 9"
-        ]        
-        self.frame_checkbox = Frame_ScrollCheckbox(self, titulo="Valores", textos=self.textos)
-        self.frame_checkbox.grid(row=0, column=0, padx=(20, 10), pady=(10, 0), sticky="nsew")
+#         self.textos = [
+#             "Valor 1",
+#             "Valor 2",
+#             "Valor 3",
+#             "Valor 4",
+#             "Valor 5",
+#             "Valor 6",
+#             "Valor 7",
+#             "Valor 8",
+#             "Valor 9"
+#         ]        
+#         self.frame_checkbox = Frame_ScrollCheckbox(self, titulo="Valores", textos=self.textos)
+#         self.frame_checkbox.grid(row=0, column=0, padx=(20, 10), pady=(10, 0), sticky="nsew")
         
-        self.frame_radiobtn = FrameRadioButton(self, titulo="Opções", textos=["Opção 1", "Opção 2", "Opção 3"])
-        self.frame_radiobtn.grid(row=0, column=1, padx=(10, 20), pady=(10, 0), sticky="nsew")
+#         self.frame_radiobtn = FrameRadioButton(self, titulo="Opções", textos=["Opção 1", "Opção 2", "Opção 3"])
+#         self.frame_radiobtn.grid(row=0, column=1, padx=(10, 20), pady=(10, 0), sticky="nsew")
         
-        self.btn_print = ctk.CTkButton(self, text="Enviar", command=self.botao_print)
-        self.btn_print.grid(row=1, column=0, padx=20, pady=10, columnspan=2, sticky="new")
+#         self.btn_print = ctk.CTkButton(self, text="Enviar", command=self.botao_print)
+#         self.btn_print.grid(row=1, column=0, padx=20, pady=10, columnspan=2, sticky="new")
     
     
-    def botao_print(self) -> None:
-        print(self.frame_checkbox.get(), self.frame_radiobtn.get())
+#     def botao_print(self) -> None:
+#         print(self.frame_checkbox.get(), self.frame_radiobtn.get())
     
-app = App()
-app.mainloop()
+# app = App()
+# app.mainloop()

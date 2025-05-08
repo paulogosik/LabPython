@@ -101,8 +101,8 @@ class FrameCriarConta(ctk.CTkFrame):
         self.label_boasvindas = ctk.CTkLabel(self, text="Bem-vindo ao futuro!", text_color="#A9A9A9", font=("Arial Black", 28, "bold"), width=480)
         self.label_boasvindas.grid(row=1, column=0, padx=10, pady=(0, 0))
         
-        self.label_boasvindas = ctk.CTkLabel(self, text="Crie sua conta para fazer parte deste projeto!", text_color="#DCDCDC")
-        self.label_boasvindas.grid(row=2, column=0, pady=(0, 30))
+        self.label_boasvindas2 = ctk.CTkLabel(self, text="Crie sua conta para fazer parte deste projeto!", text_color="#DCDCDC")
+        self.label_boasvindas2.grid(row=2, column=0, pady=(0, 30))
         
         self.usuario = ctk.CTkEntry(self, placeholder_text="Usuário", width=240)
         self.usuario.grid(row=3, column=0, padx=10)

@@ -76,7 +76,7 @@ import customtkinter as ctk
 import bcrypt
 from pymongo import MongoClient, collection
 from pymongo.errors import DuplicateKeyError
-import re
+from PIL import Image
 
 def connect_mongodb() -> collection.Collection:
     uri = "mongodb+srv://root:root123@testdb.abni7vh.mongodb.net/"
@@ -91,20 +91,33 @@ class FrameCriarConta(ctk.CTkFrame):
         
         self.grid_columnconfigure(0, weight=1)
         
+        self.caminho_imagem = "C:/Users/Teste/Documents/LabPython/gui_customtkinter/img/iconapp2.png"
+        self.imagem_pil = Image.open(self.caminho_imagem)
+        self.imagem_logo = ctk.CTkImage(light_image=self.imagem_pil, dark_image=self.imagem_pil, size=(100, 100))
+        
+        self.label_imagem = ctk.CTkLabel(self, image=self.imagem_logo, text="")
+        self.label_imagem.grid(row=0, column=0, pady=(40, 10))
+        
+        self.label_boasvindas = ctk.CTkLabel(self, text="Bem-vindo ao futuro!", text_color="#A9A9A9", font=("Arial Black", 28, "bold"), width=480)
+        self.label_boasvindas.grid(row=1, column=0, padx=10, pady=(0, 0))
+        
+        self.label_boasvindas = ctk.CTkLabel(self, text="Crie sua conta para fazer parte deste projeto!", text_color="#DCDCDC")
+        self.label_boasvindas.grid(row=2, column=0, pady=(0, 30))
+        
         self.usuario = ctk.CTkEntry(self, placeholder_text="Usuário", width=240)
-        self.usuario.grid(row=0, column=0, padx=10, pady=(10, 0))
+        self.usuario.grid(row=3, column=0, padx=10)
         
         self.email = ctk.CTkEntry(self, placeholder_text="E-mail", width=240)
-        self.email.grid(row=1, column=0, padx=10, pady=(10, 0))
+        self.email.grid(row=4, column=0, padx=10, pady=(10, 0))
         
         self.nome = ctk.CTkEntry(self, placeholder_text="Nome Completo", width=240)
-        self.nome.grid(row=2, column=0, padx=10, pady=(10, 0))
+        self.nome.grid(row=5, column=0, padx=10, pady=(10, 0))
         
         self.senha = ctk.CTkEntry(self, placeholder_text="Senha", show="*", width=240)
-        self.senha.grid(row=3, column=0, padx=10, pady=(10, 0))
+        self.senha.grid(row=6, column=0, padx=10, pady=10)
         
         self.senha2 = ctk.CTkEntry(self, placeholder_text="Digite a senha novamente", show="*", width=240)
-        self.senha2.grid(row=4, column=0, padx=10, pady=(10, 0))
+        self.senha2.grid(row=7, column=0, padx=10)
         
         self.bota_facalogin = ctk.CTkButton(
             self,
@@ -114,7 +127,7 @@ class FrameCriarConta(ctk.CTkFrame):
             command=master.botao_facalogin,
             text_color="#6495ED"
             )
-        self.bota_facalogin.grid(row=5, column=0, pady=(40, 0))
+        self.bota_facalogin.grid(row=8, column=0, pady=(30, 0))
         
         self.botao_enviar = ctk.CTkButton(
             self,
@@ -124,10 +137,10 @@ class FrameCriarConta(ctk.CTkFrame):
             fg_color="#6959CD",
             hover_color="#483D8B"
             )
-        self.botao_enviar.grid(row=6, column=0)
+        self.botao_enviar.grid(row=9, column=0)
         
         self.label_aviso = ctk.CTkLabel(self, text="", text_color="red")
-        self.label_aviso.grid(row=7, column=0)
+        self.label_aviso.grid(row=10, column=0, pady=(0, 40))
        
        
     def senha_hashed(self) -> str:
@@ -158,7 +171,7 @@ class App(ctk.CTk):
         self.grid_rowconfigure(0, weight=1)
         
         self.frame_criarconta = FrameCriarConta(self)
-        self.frame_criarconta.grid(row=0, column=1)
+        self.frame_criarconta.grid(row=0, column=1, padx=(200, 20))
 
 
     def botao_facalogin(self) -> None:
